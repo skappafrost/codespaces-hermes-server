@@ -1,7 +1,124 @@
 # 🚀 Codespaces Hermes Server
 
-> Hướng dẫn thiết lập **GitHub Codespaces miễn phí** để chạy **Hermes Agent** như một server cá nhân.
-> Guide to set up **free GitHub Codespaces** running **Hermes Agent** as your personal AI server.
+[![GitHub Free](https://img.shields.io/badge/GitHub-Free-white?logo=github&labelColor=181717)]()
+[![Codespaces](https://img.shields.io/badge/Codespaces-120h/month-white?logo=visualstudiocode&labelColor=007ACC)]()
+[![Hermes Agent](https://img.shields.io/badge/Hermes%20Agent-Server-white?logo=openai&labelColor=412991)]()
+[![Tailscale Free](https://img.shields.io/badge/Tailscale-Free-white?logo=tailscale&labelColor=24292F)]()
+
+> **🇻🇳 Hướng dẫn thiết lập GitHub Codespaces miễn phí để chạy Hermes Agent như server cá nhân**
+> **🇬🇧 Complete guide to running Hermes Agent on free GitHub Codespaces as your personal AI backend**
+
+<p align="center">
+  ⭐ Star repo này nếu bạn thấy hữu ích! &nbsp;|&nbsp; 📧 skappafrost@gmail.com
+</p>
+
+---
+
+## 📊 Tổng quan kiến trúc
+
+<details open>
+<summary><b>🖥️ Các thành phần nói chuyện với nhau thế nào?</b></summary>
+
+```mermaid
+flowchart TB
+    subgraph Local["🖥️ Máy tính của bạn"]
+        direction TB
+        Hermes["Hermes Desktop / CLI"]
+        TailLocal["Tailscale Client"]
+    end
+
+    subgraph Codespace["☁️ GitHub Codespace (Docker Container)"]
+        direction TB
+        DC[".devcontainer/postStart.sh"]
+        TS["tailscaled (daemon)"]
+        HS["hermes serve --port 9119"]
+        DC -->|"khởi động khi start"| TS
+        DC -->|"khởi động khi start"| HS
+    end
+
+    subgraph Tailnet["🔒 Tailscale Mesh VPN"]
+        IP["100.x.x.x (IP ảo cố định)"]
+    end
+
+    TailLocal <-->|"WireGuard tunnel"| IP
+    IP <-->|"kết nối"| TS
+    Hermes -->|"http://100.x.x.x:9119"| HS
+    Hermes -->|"Auth: username + password"| HS
+```
+
+> **Cách hoạt động:** Codespace chạy `hermes serve` → Tailscale gán IP cố định → Máy local kết nối qua Tailscale vào IP đó → Hermes Desktop remote về Codespace
+
+</details>
+
+<details open>
+<summary><b>⏳ Luồng từng bước chi tiết</b></summary>
+
+```mermaid
+sequenceDiagram
+    participant User as 🙋 Bạn (Máy local)
+    participant GH as 🐙 GitHub
+    participant CS as ⚡ Codespace
+    participant H as 🤖 Hermes
+    participant TS as 🔗 Tailscale
+
+    Note over User: PHẦN 1: Chuẩn bị
+    User->>GH: Tạo tài khoản GitHub
+    User->>GH: Tạo repo private
+    User->>GH: Tạo .devcontainer (3 files)
+    User->>GH: Set idle timeout → 240 phút
+    User->>GH: Create codespace
+
+    Note over CS: PHẦN 2: Codespace khởi tạo
+    CS->>CS: postCreate.sh → curl install Hermes
+    CS->>H: Hermes tự chạy → Blank Setup
+    User-->>CS: (tuỳ chọn) Import backup
+    CS->>CS: Tạo ~/.hermes/.env auth
+
+    Note over CS,TS: PHẦN 3: Tailscale
+    User->>TS: Cài Tailscale trên local
+    CS->>TS: Cài Tailscale + chạy tailscaled
+    User->>TS: sudo tailscale up (đăng nhập)
+    TS->>CS: Gán IP 100.x.x.x
+    TS->>User: Gán IP cho máy local
+
+    Note over User,H: PHẦN 4: Kết nối Remote
+    User->>H: Hermes Settings → Gateway
+    User->>H: Nhập http://100.x.x.x:9119
+    H->>User: Authenticate popup
+    User->>H: Nhập username + password
+    H->>User: ✅ Connected!
+    User->>H: Save and Reconnect
+    Note over User,H: 🎉 Hermes chạy trên Codespace!
+```
+
+</details>
+
+<details open>
+<summary><b>🗺️ Roadmap tổng thể</b></summary>
+
+```mermaid
+flowchart LR
+    P1["1️⃣ Tạo GitHub"] --> P2["2️⃣ Tạo Repo"]
+    P2 --> P3["3️⃣ .devcontainer"]
+    P3 --> P4["4️⃣ Idle Timeout"]
+    P4 --> P5["5️⃣ Codespace"]
+    P5 --> P6["6️⃣ Cài Hermes"]
+    P6 --> P7["7️⃣ Tailscale VPN"]
+    P7 --> P8["8️⃣ Remote Connect"]
+    P8 --> Done["✅ HOÀN TẤT"]
+    
+    style P1 fill:#1f6feb,color:#fff
+    style P2 fill:#1f6feb,color:#fff
+    style P3 fill:#1f6feb,color:#fff
+    style P4 fill:#d29922,color:#fff
+    style P5 fill:#d29922,color:#fff
+    style P6 fill:#d29922,color:#fff
+    style P7 fill:#2ea043,color:#fff
+    style P8 fill:#2ea043,color:#fff
+    style Done fill:#2ea043,color:#fff,stroke:#7ee787,stroke-width:3px
+```
+
+</details>
 
 ---
 
