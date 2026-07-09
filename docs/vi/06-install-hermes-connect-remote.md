@@ -519,6 +519,7 @@ Giờ đây, Hermes Desktop trên máy local của bạn đang điều khiển H
 
 ## 📚 Tiếp theo
 
+- ➡️ **[Bài 7: Quản lý Codespace qua GitHub CLI](07-codespace-cli-management.md)** — Tạo shortcut start/stop, tự động hoá!
 - ⬅️ [Bài 5: Tạo Codespace](05-create-codespace.md) — Quay lại bước trước
 - 📘 [Thiết lập Git trên máy local (Appendix)](appendix-local-git-setup.md)
 

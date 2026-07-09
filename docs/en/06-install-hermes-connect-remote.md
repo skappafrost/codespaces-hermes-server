@@ -388,6 +388,8 @@ Your personal AI backend is now running in the cloud — accessible from anywher
 <p align="center">
   <a href="05-create-codespace.md">← Previous: Create a Codespace</a>
   &nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="07-codespace-cli-management.md">Next: CLI Management →</a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="../../README.md">Back to Guide Home →</a>
 </p>
 

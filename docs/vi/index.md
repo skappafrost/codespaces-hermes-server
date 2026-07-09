@@ -1,6 +1,6 @@
 # 📖 Hướng dẫn Tiếng Việt
 
-> 6 bước để thiết lập Hermes Agent trên GitHub Codespaces miễn phí.
+> 7 bước để thiết lập và quản lý Hermes Agent trên GitHub Codespaces miễn phí.
 
 ---
 
@@ -14,6 +14,7 @@
 | 4 | [Cấu hình Idle Timeout](04-configure-idle-timeout.md) | 2 phút | Tăng thời gian chờ trước khi tắt |
 | 5 | [Tạo Codespace từ Repository](05-create-codespace.md) | 3 phút | Khởi tạo và làm quen với Codespace |
 | 6 | [Cài Hermes Agent & Kết nối Remote](06-install-hermes-connect-remote.md) | 15 phút | Setup Hermes server, Tailscale, kết nối từ xa |
+| 7 | **⭐ [Quản lý Codespace qua GitHub CLI](07-codespace-cli-management.md)** | 10 phút | Cài gh CLI, tạo shortcut start/stop, tự động hoá |
 
 ### Phụ lục
 
@@ -25,4 +26,5 @@
 
 - **Chưa có tài khoản GitHub?** → Bắt đầu từ [Phần 1](01-create-github-account.md)
 - **Đã có GitHub?** → Bắt đầu từ [Phần 2](02-create-repository.md) hoặc [Phần 3](03-setup-devcontainer.md)
+- **Đã có Codespace chạy Hermes?** → Xem ngay [Phần 7](07-codespace-cli-management.md) để quản lý như pro
 - **Chỉ muốn xem nhanh?** → Xem [README](../../README.md) ở trang chính

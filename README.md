@@ -84,6 +84,7 @@ flowchart TB
 | 4 | [Cấu hình Idle Timeout](docs/vi/04-configure-idle-timeout.md) | Tăng thời gian chờ trước khi tắt | 2 phút |
 | 5 | [Tạo Codespace](docs/vi/05-create-codespace.md) | Khởi tạo và làm quen với Codespace | 3 phút |
 | 6 | [Cài Hermes & Kết nối Remote](docs/vi/06-install-hermes-connect-remote.md) | Setup Hermes server + Tailscale + remote connect | 15 phút |
+| 7 | ⭐ [Quản lý Codespace qua CLI](docs/vi/07-codespace-cli-management.md) | Cài gh CLI, tạo shortcut start/stop, tự động hoá | 10 phút |
 
 ```mermaid
 flowchart LR
@@ -92,7 +93,8 @@ flowchart LR
     P3 --> P4["4️⃣ Idle Timeout"]
     P4 --> P5["5️⃣ Codespace"]
     P5 --> P6["6️⃣ Hermes + Tailscale"]
-    P6 --> Done["✅ HOÀN TẤT"]
+    P6 --> P7["7️⃣ CLI Management"]
+    P7 --> Done["✅ HOÀN TẤT"]
 
     style P1 fill:#1f6feb,color:#fff
     style P2 fill:#1f6feb,color:#fff
@@ -100,6 +102,7 @@ flowchart LR
     style P4 fill:#d29922,color:#fff
     style P5 fill:#d29922,color:#fff
     style P6 fill:#2ea043,color:#fff
+    style P7 fill:#2ea043,color:#fff
     style Done fill:#2ea043,color:#fff,stroke:#7ee787,stroke-width:3px
 ```
 
@@ -114,8 +117,8 @@ codespaces-hermes-server/
 │   ├── postCreate.sh           # Cài Hermes Agent (1 lần)
 │   └── postStart.sh            # Khởi động Tailscale + Hermes serve (mỗi lần start)
 ├── docs/
-│   ├── vi/                     # Hướng dẫn tiếng Việt (6 phần)
-│   └── en/                     # English guide (6 parts)
+│   ├── vi/                     # Hướng dẫn tiếng Việt (7 phần)
+│   └── en/                     # English guide (7 parts)
 ├── .gitignore
 ├── LICENSE                     # MIT License
 ├── SECURITY.md                 # Chính sách bảo mật
@@ -228,6 +231,7 @@ flowchart TB
 | 4 | [Configure Idle Timeout](docs/en/04-configure-idle-timeout.md) | Increase timeout before shutdown | 2 min |
 | 5 | [Create a Codespace](docs/en/05-create-codespace.md) | Launch and explore your Codespace | 3 min |
 | 6 | [Install Hermes & Connect Remote](docs/en/06-install-hermes-connect-remote.md) | Full setup: Hermes server + Tailscale + remote | 15 min |
+| 7 | ⭐ [Codespace CLI Management](docs/en/07-codespace-cli-management.md) | Install gh CLI, create start/stop shortcuts, automate | 10 min |
 
 ---
 
