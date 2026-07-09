@@ -1,0 +1,38 @@
+# =============================================================================
+# codespaces-hermes-server — .gitignore
+# =============================================================================
+
+# Environment & secrets
+.env
+.env.local
+*.key
+*.pem
+
+# Logs
+*.log
+startup.log
+setup.log
+hermes.log
+tailscale.log
+check_startup.txt
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Editor / IDE
+.vscode/settings.json
+.idea/
+*.sublime-*
+
+# Backup / archive
+*.zip
+*.tar.gz
+*.bak
+
+# Temporary
+tmp/
+temp/

@@ -1,9 +1,17 @@
 #!/usr/bin/env bash
+# =============================================================================
+# postCreate.sh — Hermes Agent Installation (one-time setup)
+# Runs once when the Codespace is first created.
+# =============================================================================
 set -euo pipefail
 
-echo "=== postCreate.sh chạy lúc $(date) ===" >> /workspaces/Cloud-Agents/setup.log
+WORKSPACE="/workspaces/codespaces-hermes-server"
+LOG_DIR="$WORKSPACE"
+TIMESTAMP=$(date)
 
-# Cài Hermes Agent (chạy 1 lần duy nhất khi tạo Codespace)
+echo "=== postCreate.sh started at $TIMESTAMP ===" >> "$LOG_DIR/setup.log"
+
+# Install Hermes Agent (one-time — only runs on initial Codespace creation)
 curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 
-echo "[INFO] Hermes installed!" >> /workspaces/Cloud-Agents/setup.log
+echo "[INFO] Hermes Agent installed successfully." >> "$LOG_DIR/setup.log"
