@@ -29,22 +29,16 @@ Mặc định, GitHub Codespaces sẽ **tự động tắt sau 30 phút không h
 2. Click vào **avatar** của bạn ở góc trên bên phải
 3. Chọn **Settings** từ menu dropdown
 
-![Menu Settings trên GitHub](https://docs.github.com/assets/cb-34264/mw-1440/images/help/settings/userbar-account-settings.webp)
-
 ### Bước 2: Vào mục Codespaces
 
 1. Trong thanh bên trái của trang Settings, cuộn xuống
 2. Click vào **Codespaces** (nằm trong nhóm **Code, planning, and automation**)
-
-![Mục Codespaces trong Settings](https://docs.github.com/assets/cb-30362/mw-1440/images/help/settings/codespaces-settings.png)
 
 ### Bước 3: Điều chỉnh Idle Timeout
 
 1. Tìm mục **Default idle timeout**
 2. Nhập giá trị **`240`** (phút) — tương đương **4 giờ**
 3. Click nút **Save** để lưu
-
-![Cấu hình idle timeout](https://docs.github.com/assets/cb-41199/mw-1440/images/help/codespaces/settings-default-idle-timeout.png)
 
 ---
 
