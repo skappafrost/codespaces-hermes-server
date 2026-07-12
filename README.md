@@ -5,7 +5,7 @@
 > **Run Hermes Agent as a personal AI backend on free GitHub Codespaces — 24/7, zero cost, zero maintenance.**
 
 [![GitHub Free](https://img.shields.io/badge/GitHub-Free-white?logo=github&labelColor=181717)]()
-[![Codespaces](https://img.shields.io/badge/Codespaces-120%20core--hours/month-white?logo=visualstudiocode&labelColor=007ACC)]()
+[![Codespaces](https://img.shields.io/badge/~60h%20uptime/month%20(2--core)-white?logo=visualstudiocode&labelColor=007ACC)]()
 [![Hermes Agent](https://img.shields.io/badge/Hermes%20Agent-Server-white?logo=openai&labelColor=412991)]()
 [![Tailscale Free](https://img.shields.io/badge/Tailscale-Free-white?logo=tailscale&labelColor=24292F)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-white?labelColor=2ea043)]()
@@ -160,7 +160,7 @@ chmod 600 ~/.hermes/.env
 |-----------|-------------|------------|
 | Repo private | ✅ Không giới hạn | ✅ Không giới hạn |
 | Cộng tác viên trên private repo | ✅ Tối đa 3 người | ✅ Không giới hạn |
-| Codespaces core-hours/tháng | **120 core-hours** | 180 core-hours |
+| Codespaces core-hours/tháng | 120 core-hours (~60h với 2-core) | 180 core-hours |
 | GitHub Actions phút/tháng | 2,000 phút | 3,000 phút |
 
 > Với mục đích chạy Hermes Agent cá nhân, **GitHub Free là hoàn toàn đủ**.
@@ -289,7 +289,7 @@ chmod 600 ~/.hermes/.env
 |---------|-------------|------------|
 | Private repos | ✅ Unlimited | ✅ Unlimited |
 | Collaborators on private repos | ✅ Up to 3 | ✅ Unlimited |
-| Codespaces core-hours/month | **120 core-hours** | 180 core-hours |
+| Codespaces core-hours/month | 120 core-hours (~60h on 2-core) | 180 core-hours |
 | GitHub Actions minutes/month | 2,000 min | 3,000 min |
 
 > For running a personal Hermes Agent backend, **GitHub Free is more than enough**.
