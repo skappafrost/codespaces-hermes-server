@@ -59,6 +59,8 @@ While the install runs, you can prepare a backup on your local machine:
 2. This creates a `.zip` file (e.g., `hermes-backup-2025-01-01.zip`).
 3. **Drag and drop** the `.zip` file into the Codespace **Explorer panel** (the file tree on the left side of VS Code).
 
+> 💡 **Fast disk tip:** For faster transfers, use `/tmp` (fast SSD, ~44 GB). Press `Ctrl+Shift+P`, choose **Open Folder**, type `/tmp`, then drag your backup file into the Explorer. Import immediately after uploading — `/tmp` is wiped when the Codespace stops.
+
 > 💡 If you don't have a previous Hermes setup, skip this step — you'll start fresh.
 
 ---
@@ -122,6 +124,8 @@ When prompted, type **`y`** to confirm the import.
 | Free tier | Up to 100 devices, no cost |
 
 ---
+
+> ✅ **Already installed?** If you used `.devcontainer/postCreate.sh` from Step 3, Tailscale is already installed — skip to [The Problem](#the-problem-codespace-is-a-docker-container) below.
 
 #### Install Tailscale on Your Codespace
 
@@ -255,7 +259,7 @@ When the Codespace restarts, the `.devcontainer/postStart.sh` script runs automa
 **Check that everything started correctly:**
 
 ```bash
-cat /workspaces/codespaces-hermes-server/startup.log
+cat /workspaces/<your-repo-name>/startup.log
 ```
 
 You should see log entries confirming Hermes is running and listening on port 9119.
@@ -300,7 +304,7 @@ If everything is configured correctly, Hermes Desktop will connect to your Codes
 **Essential log files to check:**
 
 ```bash
-cat /workspaces/codespaces-hermes-server/startup.log     # Startup sequence
+cat /workspaces/<your-repo-name>/startup.log     # Startup sequence
 cat ~/.hermes/logs/hermes.log                              # Hermes runtime logs
 tailscale status                                           # Tailscale connectivity
 ```
