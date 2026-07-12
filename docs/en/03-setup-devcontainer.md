@@ -128,7 +128,7 @@ export PATH="$PATH:$HOME/.local/bin"
 echo "[INFO] Waiting for Codespace to stabilize..." >> "$LOG_DIR/startup.log"
 
 # Wait loop instead of fixed sleep — checks until Hermes port is ready
-for i in {1..15}; do
+for _ in {1..15}; do
     if ss -tlnp 2>/dev/null | grep -q :9119; then
         break
     fi
@@ -151,7 +151,7 @@ nohup sudo tailscaled \
 # ---------------------------------------------------------------------------
 echo "[INFO] Waiting for Docker..." >> "$LOG_DIR/startup.log"
 
-for i in {1..60}; do
+for _ in {1..60}; do
     if docker info >/dev/null 2>&1; then
         echo "[INFO] Docker is ready." >> "$LOG_DIR/startup.log"
         break
@@ -164,7 +164,7 @@ done
 # ---------------------------------------------------------------------------
 echo "[INFO] Waiting for tailscaled process..." >> "$LOG_DIR/startup.log"
 
-for i in {1..30}; do
+for _ in {1..30}; do
     if pgrep tailscaled >/dev/null; then
         echo "[INFO] tailscaled is running." >> "$LOG_DIR/startup.log"
         break

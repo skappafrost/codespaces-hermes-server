@@ -27,8 +27,6 @@
 
 ### 📖 Overview
 
-![Repo Preview](assets/repo_preview.png)
-
 This project provides a **complete step-by-step guide** for running **Hermes Agent** on **free GitHub Codespaces** as your personal AI backend — accessible from anywhere.
 
 **What you'll learn:**
@@ -157,8 +155,6 @@ chmod 600 ~/.hermes/.env
 ## 🇻🇳 Tiếng Việt
 
 ### 📖 Giới thiệu
-
-![Repo Preview](assets/repo_preview.png)
 
 Dự án này cung cấp **hướng dẫn chi tiết từ A đến Z** để thiết lập **Hermes Agent** chạy trên **GitHub Codespaces** miễn phí, biến nó thành server cá nhân mà bạn có thể truy cập từ mọi nơi.
 
