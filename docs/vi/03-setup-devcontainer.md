@@ -128,8 +128,7 @@ TIMESTAMP=$(date)
 
 echo "=== postStart.sh started at $TIMESTAMP ===" > "$WORKSPACE/check_startup.txt"
 
-# Hermes can be installed to /root/.local/bin (root) or /home/codespace/.local/bin
-export PATH="$PATH:$HOME/.local/bin:/root/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 # ---------------------------------------------------------------------------
 # START TAILSCALE DAEMON
