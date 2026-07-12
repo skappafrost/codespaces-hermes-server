@@ -27,15 +27,11 @@ Hãy đảm bảo bạn đã hoàn thành các bước trước:
 2. Ở thanh bên trái, click vào repository bạn đã tạo ở Bước 2 (ví dụ: `codespaces-hermes-server`)
 3. Trang repository sẽ hiện ra với các tab như **Code**, **Issues**, **Pull requests**, v.v.
 
-![Trang repository GitHub](https://docs.github.com/assets/cb-6007/mw-1440/images/help/repository/repo-tabs.png)
-
 ### Bước 2: Mở Codespaces
 
 1. Click vào nút **Code** màu xanh lá cây (góc trên bên phải)
 2. Trong dropdown hiện ra, click vào tab **Codespaces**
 3. Click nút **Create codespace on main** (hoặc tên nhánh mặc định)
-
-![Tạo Codespace từ repository](https://docs.github.com/assets/cb-103541/mw-1440/images/help/codespaces/codespaces-options.png)
 
 ### Bước 3: Tạo Codespace
 
@@ -67,8 +63,6 @@ Sau khi click tạo, Codespace sẽ bắt đầu khởi tạo. Quá trình này 
 4. **Chạy postCreate.sh** (~2-5 phút) — Cài đặt Hermes Agent và các dependencies
 
 > ⏳ Tổng thời gian chờ: **5-10 phút** tùy tốc độ mạng. Đây là việc chỉ xảy ra **một lần duy nhất** — lần sau start lại Codespace sẽ nhanh hơn nhiều.
-
-![Codespace đang khởi tạo](https://docs.github.com/assets/cb-22982/mw-1440/images/help/codespaces/codespaces-creating.png)
 
 ---
 
