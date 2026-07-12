@@ -412,18 +412,15 @@ GitHub Free cho **120 core-hours/tháng**. Mỗi lần Codespace chạy, bạn t
 
 ### 9.1. Bảng core-hours
 
-| Loại Codespace | Số core | Tiêu thụ mỗi giờ | 120h dùng được |
-|---------------|---------|------------------|----------------|
-| **2-core** | 2 vCPU | 2 core-hours/giờ | ~60 giờ/tháng |
-| **4-core** | 4 vCPU | 4 core-hours/giờ | ~30 giờ/tháng |
-| **8-core** | 8 vCPU | 8 core-hours/giờ | ~15 giờ/tháng |
-| **16-core (Pro)** | 16 vCPU | 16 core-hours/giờ | ~7.5 giờ/tháng |
+| Loại Codespace | Số core | RAM | Tiêu thụ mỗi giờ | 120h dùng được |
+|---------------|---------|-----|------------------|----------------|
+| **2-core** 💡 | 2 vCPU | 8 GB | 2 core-hours/giờ | ~60 giờ/tháng |
+| **4-core** | 4 vCPU | 8 GB | 4 core-hours/giờ | ~30 giờ/tháng |
 
 ### 9.2. Khuyến nghị
 
 - ✅ **2-core** là đủ cho hầu hết nhu cầu chạy Hermes server cá nhân
-- ✅ **4-core** nếu bạn chạy nhiều tác vụ nặng (fine-tuning, multi-agent)
-- ❌ **8-core+** chỉ dùng khi cần, vì tiêu tốn core-hours nhanh
+- ✅ **4-core** nếu bạn chạy nhiều tác vụ nặng, nhưng nhớ là core-hours tiêu gấp đôi
 
 ### 9.3. Chọn machine type khi tạo Codespace
 
@@ -445,6 +442,7 @@ GitHub Free cho **120 core-hours/tháng**. Mỗi lần Codespace chạy, bạn t
 |-----|----------|
 | 🛑 **Luôn Stop khi không dùng** | Codespace chạy ngầm vẫn tiêu tốn core-hours. Luôn stop khi không sử dụng. |
 | 🔄 **Dùng Idle Timeout** | Đã cấu hình ở [Bài 4](04-configure-idle-timeout.md) — Codespace tự động stop sau 240 phút không hoạt động. |
+| ⚡ **Dùng /tmp cho file tạm** | Thư mục `/tmp` có **44 GB SSD siêu nhanh** — gấp đôi ổ chính. Dùng để download, extract, compile file lớn. Nhớ copy kết quả về thư mục làm việc trước khi tắt Codespace (vì /tmp bị xoá khi shutdown). |
 | 📊 **Theo dõi usage** | [github.com/settings/codespaces](https://github.com/settings/codespaces) → Usage |
 | 🧹 **Xóa Codespace cũ** | Codespace cũ vẫn hiện trong danh sách. Xóa nếu không dùng nữa để tránh nhầm lẫn. |
 | 💾 **Backup thường xuyên** | `hermes backup` để export dữ liệu định kỳ — phòng khi Codespace bị xóa. |

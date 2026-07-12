@@ -321,17 +321,19 @@ Then wait 120 seconds and try connecting again.
 
 GitHub Codespaces bills by **core-hours** — the number of CPU cores × hours the Codespace is running.
 
-| Machine Type | Burn Rate | Monthly Budget (GitHub Free) |
-|-------------|-----------|------------------------------|
-| 2 cores — 8 GB | 2 core-hours/hour | ~60 hours |
-| 4 cores — 16 GB | 4 core-hours/hour | ~30 hours |
-| 8 cores — 32 GB | 8 core-hours/hour | ~15 hours |
+> 💡 **Note:** The free tier only offers **2-core (8 GB RAM)** and **4-core (8 GB RAM)** machines. 8-core+ machines require a paid plan.
+
+| Machine Type | RAM | Burn Rate | Monthly Budget (GitHub Free) |
+|-------------|-----|-----------|------------------------------|
+| **2 cores** 💡 | 8 GB | 2 core-hours/hour | **~60 hours** |
+| **4 cores** | 8 GB | 4 core-hours/hour | **~30 hours** |
 
 ### Tips to Stay Within the Free Tier
 
 - ⏹️ **Always stop your Codespace** when you're not using it (File → Close Remote Connection)
 - 🖥️ **2 cores is plenty** for running a personal Hermes server — don't upgrade
 - ⏰ **Set idle timeout** as configured in [Step 4](04-configure-idle-timeout.md) to auto-stop
+- ⚡ **Use /tmp for scratch work** — `/tmp` has **~44 GB of fast SSD** (2× the main disk!), perfect for large downloads, builds, and temp processing. Just remember to copy results back to your working directory before shutdown, because `/tmp` is wiped on restart
 - 📊 **Monitor usage** at [github.com/settings/billing](https://github.com/settings/billing)
 
 ---

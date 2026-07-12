@@ -39,6 +39,13 @@ Open your browser and navigate to your repository on GitHub.
 
 Click **Create codespace on main** (or **New codespace** if you've created one before).
 
+After clicking, you'll be prompted to choose a **machine type**:
+
+| Option | CPU | RAM | Best for |
+|--------|-----|-----|----------|
+| **2-core** 💡 | 2 vCPU | 8 GB | **Hermes + Tailscale (recommended)** |
+| **4-core** | 4 vCPU | 8 GB | Heavier workloads, uses 2× core-hours |
+
 > ⏳ **Wait 30 seconds to 2 minutes** while GitHub provisions a virtual machine for you. The first launch is the slowest because it builds the container image; subsequent launches are faster thanks to caching.
 
 ---
@@ -99,6 +106,18 @@ uname -a && df -h / | tail -1 && python3 --version && git --version
 | 💾 **Storage** | ~30 GB per Codespace |
 | 🌐 **Network** | If you lose internet, just refresh the page — your session resumes |
 | 💰 **Core-hours** | 120 hours/month on the Free tier (2-core machine = 60 hours of wall-clock time) |
+
+### 💾 Disk Space Breakdown
+
+The free-tier Codespace comes with a **32 GB disk**, but not all of it is available for your files:
+
+| Component | Size | Notes |
+|-----------|------|-------|
+| 💻 **VS Code + extensions** | ~15 GB | Pre-installed on every restart — **can't remove**, it's part of the Codespace image |
+| 📂 **Available for your data** | ~17 GB | Enough for Hermes + dependencies + projects |
+| ⚡ **/tmp (SSD scratch)** | **~44 GB** | Very fast SSD, but **cleared on shutdown** — great for temporary file processing |
+
+> 💡 **Tip:** For large file operations (downloads, extraction, compilation), use `/tmp` — it's 2× larger than the main disk and much faster. Just copy your results to the working directory before shutting down.
 
 ---
 

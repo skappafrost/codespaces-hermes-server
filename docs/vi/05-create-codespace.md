@@ -43,11 +43,22 @@ Sau khi click **Create codespace on main**, GitHub sẽ hiển thị tùy chọn
 
 | Tùy chọn | Core | RAM | Phù hợp |
 |----------|------|-----|---------|
-| **2-core** 💡 | 2 cores | 4 GB | **Hermes Agent + Tailscale (khuyến nghị)** |
-| 4-core | 4 cores | 8 GB | Dự án nặng hơn |
-| 8-core | 8 cores | 16 GB | Build lớn, nhưng tốn core-hours |
+| **2-core** 💡 | 2 vCPU | 8 GB | **Hermes Agent + Tailscale (khuyến nghị)** |
+| **4-core** | 4 vCPU | 8 GB | Dự án nặng hơn, tốn core-hours gấp đôi |
 
 > 💡 **Mẹo:** Chọn **2-core** là đủ để chạy Hermes Agent và Tailscale. Tiết kiệm core-hours cho việc khác!
+
+##### 📀 Thông tin về ổ đĩa
+
+Codespace free tier có **32 GB ổ cứng**, nhưng cần biết:
+
+| Hạng mục | Dung lượng | Ghi chú |
+|----------|-----------|---------|
+| **💻 VS Code + extensions** | ~15 GB | VS Code tự động cài mỗi lần restart — **không thể gỡ** vì nó là một phần của Codespace image |
+| **📂 Dùng được cho code & data** | ~17 GB | Đủ cho Hermes + dependencies + project files |
+| **⚡ /tmp (SSD siêu nhanh)** | **~44 GB** | Tốc độ rất cao, nhưng **bị xoá khi tắt Codespace** — dùng để xử lý file tạm thời |
+
+> 💡 **Mẹo:** Nếu bạn cần xử lý file lớn (download, extract, compile), hãy dùng thư mục `/tmp` — nó rộng gấp đôi ổ chính và nhanh hơn nhiều! Chỉ cần copy kết quả về thư mục làm việc trước khi tắt Codespace.
 
 ### Bước 4: Đợi Codespace khởi tạo
 
