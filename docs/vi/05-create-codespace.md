@@ -64,6 +64,13 @@ Sau khi click tạo, Codespace sẽ bắt đầu khởi tạo. Quá trình này 
 
 > ⏳ Tổng thời gian chờ: **5-10 phút** tùy tốc độ mạng. Đây là việc chỉ xảy ra **một lần duy nhất** — lần sau start lại Codespace sẽ nhanh hơn nhiều.
 
+> 🔴 **CẢNH BÁO NGHIÊM TRỌNG:** Trong lúc chờ, **KHÔNG ĐƯỢC click vào bất kỳ nút nào** như "Cancel", "Stop", "Close", "Skip", "Remind me later", hay tắt tab trình duyệt. Nếu bạn hủy tiến trình giữa chừng:
+> - `postCreate.sh` sẽ **không** chạy → Hermes và Tailscale sẽ **không được cài đặt**
+> - Codespace sẽ khởi động nhưng không có Hermes → mất thời gian xử lý lỗi
+> - **Cách duy nhất để sửa** là xoá Codespace này và tạo lại từ đầu
+> 
+> **Hãy kiên nhẫn chờ cho đến khi thấy màn hình terminal xuất hiện** với dấu nhắc lệnh (dòng `@your-codespace-name ➜ /workspaces/...`) — đó là lúc bạn có thể thao tác.
+
 ---
 
 ## 🖥️ Làm quen với giao diện Codespace

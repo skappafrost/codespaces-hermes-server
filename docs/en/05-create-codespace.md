@@ -41,7 +41,14 @@ Click **Create codespace on main** (or **New codespace** if you've created one b
 
 > 💡 The default machine is **2 core — 8GB RAM**. To change it after creation, go to **https://github.com/codespaces** → click **`...`** → **Change machine type**. Free tier only offers 2 options: 2-core (8GB) or 4-core (8GB).
 
-> ⏳ **Wait 30 seconds to 2 minutes** while GitHub provisions a virtual machine. The first launch is the slowest because it builds the container image; subsequent launches are faster thanks to caching.
+> ⏳ **Wait 5-10 minutes** on the first creation — GitHub needs to provision the VM, build the devcontainer image, and run `postCreate.sh` to install Hermes + Tailscale. This only happens **once**; subsequent starts are fast.
+>
+> 🔴 **SERIOUS WARNING:** While waiting, **DO NOT** click any button like "Cancel", "Stop", "Close", "Skip", "Remind me later", or close the browser tab. Interrupting the process means:
+> - `postCreate.sh` will **not** run → Hermes and Tailscale will **not be installed**
+> - The Codespace will start but without Hermes → you'll have to debug or rebuild
+> - **The only fix** is to delete this Codespace and create a new one
+>
+> **Be patient and wait until you see the terminal prompt** (`@your-codespace-name ➜ /workspaces/...`) before doing anything.
 
 ---
 
