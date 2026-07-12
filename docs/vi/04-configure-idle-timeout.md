@@ -50,8 +50,7 @@ GitHub Codespaces cho phép bạn cấu hình idle timeout trong khoảng:
 |---------|-------------|---------|
 | **5–30 phút** | Học tập, thử nghiệm nhanh | ⚠️ Quá ngắn cho Hermes server |
 | **30–60 phút** | Coding session ngắn | ⚠️ Vẫn có thể bị tắt giữa chừng |
-| ****240 phút (khuyến nghị)** | **Hermes server, background task** | **✅ Cân bằng giữa uptime và core-hours** |
-| 480 phút (tối đa) | Dự án chạy liên tục | ⚠️ Tiêu tốn nhiều core-hours hơn |
+| **240 phút (tối đa — khuyến nghị)** | Hermes server, background task | ✅ Phù hợp nhất cho uptime dài |
 
 > 💡 **Mẹo nhỏ:** 240 phút là điểm ngọt (sweet spot) — đủ dài để Hermes luôn online khi bạn cần, nhưng đủ ngắn để Codespace tự tắt nếu bạn quên, tránh lãng phí core-hours.
 
@@ -107,7 +106,7 @@ Sau khi lưu, bạn có thể kiểm tra lại bằng cách:
 | Không thấy mục Codespaces trong Settings | Chưa kích hoạt Codespaces | Chỉ cần tạo Codespace lần đầu là mục này xuất hiện |
 | Idle timeout không áp dụng cho Codespace đang chạy | Thiết lập chỉ có hiệu lực cho Codespace được tạo **sau khi** cấu hình | Xoá Codespace cũ → tạo lại Codespace mới |
 | Giá trị không lưu được | Lỗi mạng hoặc session hết hạn | Refresh trang và thử lại |
-| Không thể nhập giá trị > 240 | GitHub Free giới hạn tối đa 480 phút | 240 phút là đủ dùng, không cần cao hơn |
+| Không thể nhập giá trị > 240 | GitHub Free giới hạn tối đa 240 phút | Chọn giá trị ≤ 240 là được |
 
 ---
 
