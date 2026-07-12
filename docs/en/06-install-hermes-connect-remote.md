@@ -1,408 +1,537 @@
 # Install Hermes Agent & Connect Remotely
 
-<p align="center">
-  <img src="https://hermes-agent.nousresearch.com/images/hermes-logo.svg" alt="Hermes Agent Logo" width="120"/>
-</p>
+> **Goal:** Install Hermes Agent in Codespace, set up Tailscale VPN, create Dashboard authentication, and connect from your local machine.
+>
+> ⏱️ **Time:** 15 minutes
 
-<p align="center">
-  <span style="display: inline-block; background: #28a745; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; margin: 0 4px;">⏰ 15 minutes</span>
-  <span style="display: inline-block; background: #6f42c1; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; margin: 0 4px;">💰 Free</span>
-  <span style="display: inline-block; background: #0366d6; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; margin: 0 4px;">🔗 Tailscale VPN</span>
-</p>
+---
 
-This is the final step — installing Hermes Agent inside your Codespace, setting up Tailscale for remote access, configuring dashboard authentication, and connecting from your local machine.
+## 🗺️ Overview
+
+This is the final and most important step — turning your Codespace into a personal Hermes server accessible from anywhere.
+
+**Workflow:**
+
+```mermaid
+flowchart TB
+    subgraph Terminal["💻 Terminal in Codespace"]
+        direction TB
+        Hermes["Install Hermes Agent"]
+        Tailscale["Install & Configure Tailscale"]
+        Auth["Create .env auth file"]
+    end
+
+    subgraph Restart["🔄 Restart Codespace"]
+        direction TB
+        IP["Get Tailscale IP address"]
+        Auto["Hermes auto-starts via postStart.sh"]
+    end
+
+    subgraph Local["🖥️ Local Machine"]
+        direction TB
+        Settings["Hermes Settings → Gateway"]
+        Connect["Connect to 100.x.x.x:9119"]
+    end
+
+    Terminal --> Restart
+    Restart --> Local
+```
 
 ---
 
 ## 📋 Prerequisites
 
-| Requirement | Detail |
-|-------------|--------|
-| ☁️ A running Codespace | Created in [Step 5](05-create-codespace.md) |
-| 🔑 A Tailscale account | Free tier at [tailscale.com](https://tailscale.com) |
-| 🖥️ Local machine | Windows, macOS, or Linux with Tailscale installed |
-| 🌐 Basic terminal skills | Running commands, editing files |
+- ✅ A running Codespace (see [Step 5: Create a Codespace](05-create-codespace.md))
+- ✅ Terminal window open in your Codespace
+- ✅ A free [Tailscale](https://tailscale.com) account
 
 ---
 
-## 🚀 Step-by-Step Guide
+## Step 1: Open the Terminal in Your Codespace
 
-### Step 1: Open the Terminal in Your Codespace
+After the Codespace starts, you'll see the VS Code interface in your browser. Open a terminal:
 
-Open your Codespace in GitHub. Inside the VS Code interface, open a new terminal:
+- **Method 1:** Press `` Ctrl+` `` (backtick)
+- **Method 2:** Menu → Terminal → New Terminal
+- **Method 3:** Click the "Terminal" tab in the bottom panel
 
-- **Menu:** Terminal → New Terminal
-- **Shortcut:** `` Ctrl+` `` (backtick)
+Make sure you're in Bash (default) and your working directory is `/workspaces/<your-repo-name>`.
 
-You should see a bash prompt inside your Codespace container.
+```bash
+pwd
+# Result: /workspaces/<your-repo-name>
+```
 
 ---
 
-### Step 2: Install Hermes Agent
+## Step 2: Install Hermes Agent
 
-Run the install script:
+> **Note:** If you're using `.devcontainer/postCreate.sh` from [Step 3](03-setup-devcontainer.md), Hermes **is already installed** — you can skip this step.
+
+If you need to install manually (postCreate.sh hasn't run or you need to reinstall), run:
 
 ```bash
 curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 ```
 
-⏳ **Wait 2–5 minutes** while the script downloads and installs Hermes Agent along with its dependencies. You'll see logs scrolling by as each component is set up.
+**Expected result:**
 
-#### Optional: Restore a Backup from Your Local Machine
-
-While the install runs, you can prepare a backup on your local machine:
-
-1. **On your local machine**, open a terminal and run:
-   ```bash
-   hermes backup
-   ```
-2. This creates a `.zip` file (e.g., `hermes-backup-2025-01-01.zip`).
-3. **Drag and drop** the `.zip` file into the Codespace **Explorer panel** (the file tree on the left side of VS Code).
-
-> 💡 **Fast disk tip:** For faster transfers, use `/tmp` (fast SSD, ~44 GB). Press `Ctrl+Shift+P`, choose **Open Folder**, type `/tmp`, then drag your backup file into the Explorer. Import immediately after uploading — `/tmp` is wiped when the Codespace stops.
-
-> 💡 If you don't have a previous Hermes setup, skip this step — you'll start fresh.
-
----
-
-### Step 3: Run the Setup Wizard (Blank Setup)
-
-After installation finishes, Hermes automatically launches its **setup wizard**:
-
-1. You'll see a terminal UI asking how you'd like to configure Hermes.
-2. Select **Blank setup** → **Keep unchanged** → **Setup later**.
-3. Exit the wizard temporarily by typing:
-   ```
-   /exit
-   ```
-   Or press **Ctrl+C**.
-
-This gives you a clean, unconfigured Hermes installation that we'll connect to a remote gateway shortly.
-
----
-
-### Step 4: Import a Backup (If You Have One)
-
-If you dropped a backup `.zip` file into the Codespace earlier:
-
-```bash
-# Check that the file is there
-ls -lh *.zip
-
-# Import it
-hermes import your-backup-file.zip
+```
+✓ Hermes Agent installed successfully
+  Installation path: /home/codespace/.local/bin/hermes
+  Version: x.y.z
 ```
 
-When prompted, type **`y`** to confirm the import.
+Verify Hermes is installed:
 
-> ⚠️ If you don't have a backup, skip this step — Hermes works fresh with no issues.
+```bash
+hermes --version
+```
 
----
-
-### Step 5: Install Tailscale — Remote Connectivity
-
-#### What Is Tailscale and Why Do We Need It?
-
-**Tailscale** is a VPN mesh network that creates a secure, private network between your devices. Think of it as a virtual LAN that works over the internet.
-
-**The problem it solves:**
-
-| Issue | Why It's a Problem |
-|-------|-------------------|
-| Codespaces don't have a fixed public IP | You can't connect to it reliably |
-| Codespaces don't expose ports to the internet | Security restriction by design |
-| GitHub Free doesn't include Nous subscription | No built-in remote access |
-| Codespace IPs change on every restart | Can't bookmark an address |
-
-**How Tailscale fixes this:**
-
-| Feature | Benefit |
-|---------|---------|
-| Stable virtual IP (100.x.x.x) | One address that never changes |
-| Mesh VPN network | All your devices see each other automatically |
-| End-to-end encryption (WireGuard) | Your traffic stays private |
-| Free tier | Up to 100 devices, no cost |
+> ⚠️ If you get `command not found`, add the path to your PATH:
+> ```bash
+> export PATH="$PATH:/home/codespace/.local/bin"
+> echo 'export PATH="$PATH:/home/codespace/.local/bin"' >> ~/.bashrc
+> ```
 
 ---
 
-> ✅ **Already installed?** If you used `.devcontainer/postCreate.sh` from Step 3, Tailscale is already installed — skip to [The Problem](#the-problem-codespace-is-a-docker-container) below.
+## Step 3: (Optional) Import Backup from Local Machine
 
-#### Install Tailscale on Your Codespace
+If you've used Hermes on your local machine and want to bring all your data (skills, plugins, memories, config), follow these steps:
 
-In the Codespace terminal, run:
+### 3.1. On Local Machine — Export Backup
+
+```bash
+hermes backup
+```
+
+This creates a `hermes-backup-<date>.zip` file in the current directory.
+
+### 3.2. Upload to Codespace
+
+Drag the `.zip` file from your local machine into the **Explorer panel** in VS Code (in the browser). The file will appear in your working directory (`/workspaces/<your-repo-name>/`).
+
+> 💡 **Fast disk tip:** Use `/tmp` for uploads (fast SSD, ~44 GB). Press `Ctrl+Shift+P`, choose **Open Folder**, type `/tmp`, then drag your backup file into the Explorer. Import immediately after uploading — `/tmp` is wiped when the Codespace stops.
+
+### 3.3. Import into Codespace
+
+In the Codespace terminal:
+
+```bash
+hermes import hermes-backup-<date>.zip
+```
+
+> 💡 **Benefit:** Importing a backup gives you all your skills, plugins, and configuration right away — no need to set everything up from scratch.
+
+---
+
+## Step 4: Run the Setup Wizard (First Time)
+
+When you run Hermes for the first time in Codespace, a setup wizard will appear. You can launch it now:
+
+```bash
+hermes
+```
+
+The wizard will ask a few basic questions:
+
+| Question | Suggested Response |
+|----------|-------------------|
+| **Provider** | Choose `openai` or your preferred provider |
+| **API Key** | Enter your API key (or leave blank if you don't have one yet) |
+| **Model** | Enter model name (e.g., `gpt-4o`) |
+| **Profile name** | Set a profile name, e.g., `codespace` |
+
+You can **skip the wizard** with `Ctrl+C` and configure later — since we're using Hermes in server mode, not local CLI.
+
+> 💡 **Tip:** Detailed configuration can be edited later via `~/.hermes/profiles/default/config.yaml`.
+
+---
+
+## Step 5: Set Up Tailscale
+
+### 5.1. What Is Tailscale and Why Do We Need It?
+
+GitHub Codespaces is a temporary environment — no fixed public IP and no way to expose ports to the public internet. Here's why that matters:
+
+| Problem | Solution |
+|---------|----------|
+| ❌ Codespace has no fixed public IP | ✅ Tailscale assigns a **stable** virtual IP (100.x.x.x) |
+| ❌ Port 9119 can't be accessed from outside | ✅ Tailscale creates a secure VPN tunnel |
+| ❌ No custom domain (Nous sub) | ✅ Tailscale mesh network works like a private LAN |
+
+**Tailscale** creates a private virtual mesh network (VPN) based on **WireGuard**, connecting your Codespace and local machine into a single LAN — secure, encrypted, and free for personal use.
+
+### 5.2. Install Tailscale in Codespace
+
+> ✅ **Already installed?** If you used `.devcontainer/postCreate.sh` from Step 3, Tailscale is already installed — skip to [5.3](#53-the-problem-codespace-is-a-docker-container-no-systemd).
 
 ```bash
 curl -fsSL https://tailscale.com/install.sh | sh
 ```
 
-#### The Problem: Codespace Is a Docker Container
+Expected result — Tailscale is installed to `/usr/bin/tailscale` and `/usr/sbin/tailscaled`.
 
-Codespaces run inside Docker containers, which do **not** have `systemd` (the Linux init system). This means `tailscaled` won't start automatically. The fix is straightforward — use **two terminals**.
+### 5.3. The Problem: Codespace Is a Docker Container (No systemd)
 
-**Terminal 1 — Start the daemon manually:**
+Codespaces run inside Docker containers, and containers **don't have systemd** — the traditional background service manager. This means you can't use `systemctl start tailscaled`.
+
+The fix is to **start tailscaled manually** using two terminals:
+
+**Terminal 1 — Start the daemon:**
 
 ```bash
-sudo tailscaled --tun=userspace-networking &
+sudo tailscaled --tun=userspace-networking --socks5-server=localhost:1055 --outbound-http-proxy-listen=localhost:1055 &
 ```
 
-> `--tun=userspace-networking` allows Tailscale to run inside a container without kernel-level TUN device access. This is essential for Codespaces.
+> **Explanation:**
+> - `--tun=userspace-networking`: Userspace mode (no kernel TUN/TAP required — works in containers)
+> - `--socks5-server=...`: SOCKS5 proxy for outbound connections
+> - `--outbound-http-proxy-listen=...`: HTTP proxy for outbound traffic
+> - `&`: Run in the background
 
-**Terminal 2 — Authenticate:**
+**Terminal 2 — Authenticate with Tailscale:**
+
+After the daemon is running, open a second terminal (or use the same one if you added `&`) and run:
 
 ```bash
 sudo tailscale up
 ```
 
-You'll see an **authentication URL** printed in the terminal. Click the link (or Ctrl+click) to log in with your Tailscale account in your browser.
+This will display a URL. **Click the URL** (or copy-paste it into your browser), log in with your Tailscale account, and confirm.
 
-**Verify the connection:**
-
-```bash
-tailscale status
+```
+To authenticate, visit:
+    https://login.tailscale.com/a/abc123
 ```
 
-You should see your Codespace listed with an IP like `100.x.x.x` — note this address down, you'll need it later.
+> 💡 **Important note:** If you've configured `.devcontainer/postStart.sh` as instructed, tailscaled **will start automatically** every time the Codespace boots — you don't need to run the two commands above again. The first time, you'll still need to run `sudo tailscale up` to authenticate.
+
+### 5.4. Verify Tailscale Is Working
+
+```bash
+# Check status (connected machines)
+tailscale status
+
+# Result:
+# 100.x.x.x    codespace-xxx    username@     linux   -
+# 100.y.y.y    your-laptop      username@     windows -
+
+# Get Codespace IP address
+tailscale ip
+# Result: 100.x.x.x (save this IP — you'll need it!)
+```
+
+### 5.5. Install Tailscale on Your Local Machine
+
+To connect to the Codespace, your local machine also needs Tailscale.
+
+| OS | How to Install |
+|----|----------------|
+| **Windows** | Download from [tailscale.com/download/windows](https://tailscale.com/download/windows) → run installer → log in |
+| **macOS** | `brew install --cask tailscale` or download from [tailscale.com/download/mac](https://tailscale.com/download/mac) |
+| **Linux** | `curl -fsSL https://tailscale.com/install.sh | sh` + `sudo tailscale up` |
+
+After installing, log in with the **same Tailscale account** on your local machine. When both machines are in the same tailnet, you can test with ping:
+
+```bash
+# On local machine (ping the Codespace)
+ping 100.x.x.x
+# If you get replies → connection successful!
+```
 
 ---
 
-#### Install Tailscale on Your Local Machine
+## Step 6: Create Dashboard Authentication
 
-| Platform | Command |
-|----------|---------|
-| **Windows** | Download from [tailscale.com/download/windows](https://tailscale.com/download/windows) and install |
-| **macOS** | `brew install --cask tailscale` |
-| **Linux** | `curl -fsSL https://tailscale.com/install.sh | sh` |
-
-After installing, **log in with the same Tailscale account** you used on the Codespace.
-
-Verify:
+The Hermes server needs authentication to protect the Dashboard from unauthorized access. Create a `.env` file in `~/.hermes/`:
 
 ```bash
-tailscale status
-```
-
-Both your local machine and the Codespace should now appear in the list. They can see each other — the mesh network is alive.
-
----
-
-### Step 6: Configure Dashboard Authentication
-
-For security, Hermes requires a username, password, and secret to authenticate remote connections. Create an environment file:
-
-```bash
+# Create directory if it doesn't exist
 mkdir -p ~/.hermes
-```
 
-Now set up the file. The easiest method uses **two terminals**:
-
-**Terminal 1 — Start writing the file:**
-
-```bash
-cat >> ~/.hermes/.env <<'EOF'
+# Create .env file with authentication info
+cat > ~/.hermes/.env << 'EOF'
 HERMES_DASHBOARD_BASIC_AUTH_USERNAME=admin
-HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=your-strong-password-here
-HERMES_DASHBOARD_BASIC_AUTH_SECRET=
+HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=<replace-with-strong-password>
+HERMES_DASHBOARD_BASIC_AUTH_SECRET=<replace-with-secret-string>
 EOF
-```
 
-Replace `your-strong-password-here` with a strong password you'll remember.
-
-**Terminal 2 — Generate the secret:**
-
-```bash
-openssl rand -base64 32
-```
-
-Copy the output (a long base64 string), then go back to **Terminal 1** and paste it into the `HERMES_DASHBOARD_BASIC_AUTH_SECRET=` line (remove the newline after `=` so it reads `HERMES_DASHBOARD_BASIC_AUTH_SECRET=pasted-value`).
-
-> 💡 If `openssl` isn't available, you can use any 32+ character random string instead. Even `uuidgen` output works.
-
-**Secure the file:**
-
-```bash
+# Protect the file — only owner can read
 chmod 600 ~/.hermes/.env
 ```
 
-**Verify the contents:**
+### Field Explanation:
+
+| Variable | Description | Suggestion |
+|----------|-------------|------------|
+| `HERMES_DASHBOARD_BASIC_AUTH_USERNAME` | Dashboard login username | `admin` or your preferred name |
+| `HERMES_DASHBOARD_BASIC_AUTH_PASSWORD` | Login password | Use a strong password, at least 12 characters |
+| `HERMES_DASHBOARD_BASIC_AUTH_SECRET` | Secret string for JWT/session | Generate using the command below |
+
+Generate a random secret:
 
 ```bash
-cat ~/.hermes/.env
+# Method 1: Using openssl (recommended)
+openssl rand -base64 32
+
+# Method 2: Using Python (if openssl isn't available)
+python3 -c "import secrets; print(secrets.token_urlsafe(32))"
 ```
 
-You should see all three variables set correctly.
+Copy the output and paste it into the `HERMES_DASHBOARD_BASIC_AUTH_SECRET` field in the `.env` file.
 
-> 🔒 **Security note:** `chmod 600` ensures only you can read this file. Never commit `.env` files to version control.
+> ⚠️ **Security warnings:**
+> - NEVER commit `.env` files to Git
+> - NEVER use weak passwords like `123456` or `admin`
+> - Always set `chmod 600` so no one else can read it
+> - `.env` is already added to `.gitignore` in the template project
 
 ---
 
-### Step 7: Restart Your Codespace
+## Step 7: Restart Codespace
 
-To apply everything cleanly:
+### 7.1. Save Your Tailscale IP
 
-1. **Get the Tailscale IP** if you haven't already:
-   ```bash
-   tailscale ip
-   ```
-   Save this `100.x.x.x` address.
+```bash
+tailscale ip
+# Example: 100.87.123.45
+```
 
-2. **Close the remote connection:**
-   - In VS Code: **File → Close Remote Connection**
+**Save this address** — you'll need it to connect from your local machine.
 
-3. **Reopen the Codespace:**
-   - Go to [github.com/codespaces](https://github.com/codespaces)
-   - Click on your Codespace name
+### 7.2. Stop the Codespace
 
-When the Codespace restarts, the `.devcontainer/postStart.sh` script runs automatically, launching:
-- `tailscaled` (Tailscale daemon)
-- `hermes serve --port 9119` (Hermes server)
+There are two ways to stop a Codespace:
 
-**Check that everything started correctly:**
+**Method 1 — Via browser:**
+1. Go to [github.com/codespaces](https://github.com/codespaces)
+2. Find your Codespace
+3. Click the `...` (More actions) → **Stop codespace**
+
+**Method 2 — Via terminal (inside Codespace):**
+```bash
+# This command will stop the Codespace (you'll be disconnected)
+gh codespace stop
+```
+
+### 7.3. Restart the Codespace
+
+1. Go to [github.com/codespaces](https://github.com/codespaces)
+2. Click on your Codespace name to restart it
+3. Wait 20-30 seconds for the Codespace to boot and run `postStart.sh`
+
+### 7.4. Check startup.log
+
+Once the Codespace is running again, open a terminal and check the log:
 
 ```bash
 cat /workspaces/<your-repo-name>/startup.log
 ```
 
-You should see log entries confirming Hermes is running and listening on port 9119.
+**Expected result:**
 
----
-
-### Step 8: Connect from Your Local Machine
-
-Now the moment of truth — connecting your local Hermes Desktop to the remote Codespace.
-
-**Prerequisites on your local machine:**
-- ✅ Tailscale installed and logged in (same account as the Codespace)
-- ✅ Hermes Desktop installed
-- ✅ You know your Codespace's Tailscale IP (`100.x.x.x`)
-
-**Steps:**
-
-1. Open **Hermes Desktop** on your local machine.
-2. Go to **Settings → Gateway**.
-3. Set **Remote URL** to:
-   ```
-   http://100.x.x.x:9119
-   ```
-   (Replace `100.x.x.x` with your actual Tailscale IP.)
-4. Click **Authenticate** and enter the username and password you set in Step 6.
-5. Click **Save and Reconnect**.
-
-If everything is configured correctly, Hermes Desktop will connect to your Codespace server and you'll see it as the active backend.
-
----
-
-#### Troubleshooting
-
-| Symptom | Likely Cause | Fix |
-|---------|-------------|-----|
-| Connection refused | Hermes isn't running | `cat startup.log` — if empty, run manually: `bash .devcontainer/postStart.sh` |
-| Timeout connecting | Tailscale not connected | Check `tailscale status` on both machines |
-| Authentication failed | Wrong credentials | Re-check `~/.hermes/.env` on the Codespace |
-| Can't ping 100.x.x.x | Different Tailscale accounts | Both machines must use the same account |
-| Still connecting after 2 minutes | Service still starting | Wait 120 seconds — Hermes can be slow on first boot |
-
-**Essential log files to check:**
-
-```bash
-cat /workspaces/<your-repo-name>/startup.log     # Startup sequence
-cat ~/.hermes/logs/hermes.log                              # Hermes runtime logs
-tailscale status                                           # Tailscale connectivity
+```
+=== postStart.sh started at Sat Jul  9 10:00:00 UTC 2026 ===
+[INFO] Waiting for Codespace to stabilize...
+[INFO] Starting tailscaled...
+[INFO] Waiting for Docker...
+[INFO] Docker is ready.
+[INFO] Waiting for tailscaled process...
+[INFO] tailscaled is running.
+[INFO] Starting Hermes server...
+[SUCCESS] Hermes server started successfully.
 ```
 
-**If your Codespace stopped:** Just reopen it from [github.com/codespaces](https://github.com/codespaces) — `postStart.sh` will pick up automatically.
+> ❗ **If you see `[ERROR] Hermes server failed to start`:**
+> 1. Check detailed logs: `cat /workspaces/<your-repo-name>/hermes.log`
+> 2. Check if Hermes is installed: `which hermes`
+> 3. Try starting manually: `hermes serve --host 0.0.0.0 --port 9119 &`
 
-**Manual fallback:** If the auto-start fails, SSH into your Codespace and run:
-
-```bash
-bash .devcontainer/postStart.sh
-```
-
-Then wait 120 seconds and try connecting again.
-
----
-
-## 📊 Managing Core-Hours
-
-GitHub Codespaces bills by **core-hours** — the number of CPU cores × hours the Codespace is running.
-
-> 💡 **Note:** The free tier only offers **2-core (8 GB RAM)** and **4-core (8 GB RAM)** machines. 8-core+ machines require a paid plan.
-
-| Machine Type | RAM | Burn Rate | Monthly Budget (GitHub Free) |
-|-------------|-----|-----------|------------------------------|
-| **2 cores** 💡 | 8 GB | 2 core-hours/hour | **~60 hours** |
-| **4 cores** | 8 GB | 4 core-hours/hour | **~30 hours** |
-
-### Tips to Stay Within the Free Tier
-
-- ⏹️ **Always stop your Codespace** when you're not using it (File → Close Remote Connection)
-- 🖥️ **2 cores is plenty** for running a personal Hermes server — don't upgrade
-- ⏰ **Set idle timeout** as configured in [Step 4](04-configure-idle-timeout.md) to auto-stop
-- ⚡ **Use /tmp for scratch work** — `/tmp` has **~44 GB of fast SSD** (2× the main disk!), perfect for large downloads, builds, and temp processing. Just remember to copy results back to your working directory before shutdown, because `/tmp` is wiped on restart
-- 📊 **Monitor usage** at [github.com/settings/billing](https://github.com/settings/billing)
-
----
-
-## ✅ Verification
-
-Confirm everything is working:
+Verify Hermes is running:
 
 ```bash
-# Check the Hermes version
-hermes --version
+# Check process
+ps aux | grep hermes
 
-# Send a test chat message
-hermes chat -q "Hello, are you working?"
+# Check port 9119
+ss -tlnp | grep 9119
 ```
 
-You should receive a response from your remote Hermes Agent.
+---
+
+## Step 8: Connect from Your Local Machine
+
+### 8.1. Open Hermes Desktop on Your Local Machine
+
+Make sure your local machine has [Hermes Agent](https://hermes-agent.nousresearch.com/docs) installed and Tailscale is running (see Step 5.5).
+
+### 8.2. Configure Remote Gateway
+
+1. Open **Hermes Settings** (or `hermes config`)
+2. Go to **Gateway**
+3. Enter the address: `http://100.x.x.x:9119` (replace `100.x.x.x` with the IP you saved)
+4. Click **Authenticate**
+
+```mermaid
+sequenceDiagram
+    participant Local as Local Machine
+    participant Tail as Tailscale
+    participant CS as Codespace
+
+    Local->>Tail: Connect to Tailnet
+    Tail->>CS: WireGuard Tunnel
+    Local->>CS: GET http://100.x.x.x:9119
+    CS->>Local: Request Basic Auth
+    Local->>CS: Send username + password
+    CS->>Local: ✅ Connection successful!
+```
+
+### 8.3. Authenticate
+
+When prompted, enter:
+- **Username:** The value of `HERMES_DASHBOARD_BASIC_AUTH_USERNAME`
+- **Password:** The value of `HERMES_DASHBOARD_BASIC_AUTH_PASSWORD`
+
+### 8.4. Save and Connect
+
+1. Click **Save and Reconnect**
+2. Wait a few seconds — Hermes Desktop will switch to **Connected** status
+3. Check the status bar: you'll see a green connection icon (🟢)
+
+**Verify the connection:**
+
+```bash
+# On local machine, check Hermes can call the remote API
+hermes status
+# Result: Connected to remote Hermes at http://100.x.x.x:9119
+```
 
 ---
 
-## 🎉 Congratulations!
+## Step 9: Manage Core-Hours
 
-You've successfully:
-- ✅ Installed Hermes Agent on GitHub Codespaces
-- ✅ Set up Tailscale mesh VPN for secure remote access
-- ✅ Configured dashboard authentication
-- ✅ Connected from your local machine
+GitHub Free gives you **120 core-hours/month**. Every time your Codespace runs, you consume core-hours based on the number of cores and uptime.
 
-Your personal AI backend is now running in the cloud — accessible from anywhere, at any time, with zero monthly cost.
+### 9.1. Core-Hours Table
+
+| Codespace Type | Cores | RAM | Burn Rate | 120h Lasts |
+|----------------|-------|-----|-----------|------------|
+| **2-core** 💡 | 2 vCPU | 8 GB | 2 core-hours/hour | ~60 hours/month |
+| **4-core** | 4 vCPU | 8 GB | 4 core-hours/hour | ~30 hours/month |
+
+### 9.2. Recommendations
+
+- ✅ **2-core** is sufficient for most personal Hermes server needs
+- ✅ **4-core** if you run heavy workloads, but remember it burns core-hours twice as fast
+
+### 9.3. Choosing Machine Type When Creating a Codespace
+
+1. When creating a Codespace, click **Configure**
+2. In the **Machine type** dropdown, choose:
+   - `2-core` → for most users
+   - `4-core` → if you need more performance
+3. Confirm Codespace creation
+
+> 💡 **Tip:** You can change the machine type even while the Codespace is running: Settings → Codespaces → Change machine type.
+
+---
+
+## Step 10: Tips & Billing Information
+
+### 10.1. Optimization Tips
+
+| Tip | Detail |
+|-----|--------|
+| 🛑 **Always Stop when not in use** | A running Codespace still burns core-hours. Always stop when not using it. |
+| 🔄 **Use Idle Timeout** | Configured in [Step 4](04-configure-idle-timeout.md) — Codespace auto-stops after 240 minutes of inactivity. |
+| ⚡ **Use /tmp for scratch files** | `/tmp` has **44 GB of super-fast SSD** — double the main disk! Use it for downloads, extraction, and compiling large files. Remember to copy results back to your working directory before shutdown (because /tmp is wiped on restart). |
+| 📊 **Monitor usage** | [github.com/settings/codespaces](https://github.com/settings/codespaces) → Usage |
+| 🧹 **Delete old Codespaces** | Old Codespaces still show in the list. Delete unused ones to avoid confusion. |
+| 💾 **Backup regularly** | `hermes backup` to export data periodically — in case the Codespace gets deleted. |
+| 🚀 **Use postCreate.sh** | This script installs Hermes automatically — saves time every time you create a new Codespace. |
+
+### 10.2. Billing Information
+
+| Scenario | Cost |
+|----------|------|
+| 2-core Codespace, running 30h/month | **Free** (within 120 core-hours Free) |
+| 4-core Codespace, running 30h/month | **Free** (uses 120/120 core-hours) |
+| 8-core Codespace, running 30h/month | **~$18 extra** (over quota) |
+| GitHub Pro ($4/month) | Increases quota to 180 core-hours/month |
+
+> 💡 **Conclusion:** For personal use running Hermes a few hours a day, a **GitHub Free + 2-core Codespace** is completely free and sufficient.
 
 ---
 
-## 📚 Navigation
+## 🧪 Troubleshooting
 
-| ← Previous | Up | 
-|------------|----|
-| [Step 5: Create a Codespace](05-create-codespace.md) | [Back to Guide Home](../../README.md) |
+### Issue 1: Can't Connect from Local Machine
+
+```
+Connection refused or timeout
+```
+
+**Check:**
+1. Is Tailscale running on both Codespace and local machine?
+2. Can you ping the Codespace? → `ping 100.x.x.x`
+3. Is Hermes server running? → `ps aux | grep hermes` (inside Codespace)
+4. Is firewall blocking port 9119?
+
+### Issue 2: Authentication Error
+
+```
+401 Unauthorized
+```
+
+**Check:**
+1. Does `.env` file exist? → `ls -la ~/.hermes/.env`
+2. Are file permissions correct? → `stat ~/.hermes/.env` (should be `-rw-------`)
+3. Is the file syntax correct? No stray quotes or extra spaces?
+
+### Issue 3: Tailscale Won't Connect
+
+```
+No internet connection or tailscaled not running
+```
+
+**Check:**
+1. Is tailscaled running? → `ps aux | grep tailscaled`
+2. Are you logged in? → `tailscale status`
+3. Try running again: `sudo tailscale up`
 
 ---
 
-## 📊 GitHub Free vs Pro Comparison
+## ✅ Conclusion
 
-| Feature | GitHub Free | GitHub Pro |
-|---------|-------------|------------|
-| Private repos | ✅ Unlimited | ✅ Unlimited |
-| Collaborators on private repos | ✅ Up to 3 | ✅ Unlimited |
-| Codespaces core-hours/month | **120 hours** | **180 hours** |
-| GitHub Actions minutes/month | 2,000 min | 3,000 min |
+After this step, you've completed the entire setup process!
 
-> For running a personal Hermes Agent backend, **GitHub Free is more than enough** — 120 core-hours per month gives you ~60 hours of uptime with a 2-core machine.
+| Task | Status |
+|------|--------|
+| 🔧 Codespace running 24/7 | ✅ |
+| 🚀 Hermes Agent installed | ✅ |
+| 🔒 Tailscale VPN connected | ✅ |
+| 🔑 Dashboard Auth configured | ✅ |
+| 🖥️ Remote connection from local machine | ✅ |
+
+Your Hermes Desktop on your local machine is now controlling a Hermes Agent running remotely on Codespace — completely free, secure, and always ready.
 
 ---
+
+---
+
 <!-- Navigation -->
 <p align="center">
-  <a href="05-create-codespace.md">← Previous: Create a Codespace</a>
+  <a href="05-create-codespace.md">← Step 5: Create a Codespace</a>
   &nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="07-codespace-cli-management.md">Next: CLI Management →</a>
+  <a href="07-codespace-cli-management.md">Step 7: CLI Management →</a>
 </p>
 
 <p align="center">
-  <strong>Part 6 / 7 — 🎉 You've completed the setup!</strong>
+  <strong>Part 6 / 7</strong>
 </p>
 
 ---
 
-<p align="center">
-  <strong>⭐ Star this repo if you found this guide helpful!</strong>
-</p>
+> **Have questions?** Open a [GitHub Issue](https://github.com/skappafrost/codespaces-hermes-server/issues) or email **[skappafrost@gmail.com](mailto:skappafrost@gmail.com)**.
