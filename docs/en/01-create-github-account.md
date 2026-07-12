@@ -36,6 +36,16 @@ You'll land on the GitHub homepage with a **Sign up** button in the top-right co
 - On the plan selection page, click **Continue for free**
 - **No credit card is required** — the free plan includes unlimited public and private repositories
 
+The Free plan includes:
+
+| Feature | Free Plan |
+|---------|:--------:|
+| Unlimited public & private repositories | ✅ |
+| Unlimited collaborators | ✅ |
+| GitHub Actions (2,000 min/month) | ✅ |
+| GitHub Pages (free static sites) | ✅ |
+| Codespaces (120 core-hours — ~60h uptime with 2-core) | ✅ |
+
 ---
 
 ## Step 4: Complete Onboarding

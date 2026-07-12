@@ -90,7 +90,7 @@ Gói Free bao gồm:
 | Cộng tác viên không giới hạn | ✅ |
 | GitHub Actions (2000 phút/tháng) | ✅ |
 | GitHub Pages (trang web tĩnh miễn phí) | ✅ |
-| Codespaces (120 giờ/tháng) | ✅ |
+| Codespaces (120 core-hours — ~60h uptime với 2-core) | ✅ |
 
 ---
 
