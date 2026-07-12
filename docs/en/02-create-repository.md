@@ -52,7 +52,9 @@ Once you've filled in the fields, click the green **Create repository** button a
 
 ## Step 5: Verify the Result
 
-After creation, you'll be taken to a **Quick setup** page that displays git remote commands similar to this:
+> ✅ **You can skip this step** — it's purely informational. If you already know your repository was created, feel free to move on.
+
+When you do continue, after creation you'll be taken to a **Quick setup** page that displays git remote commands similar to this:
 
 ```bash
 git remote add origin https://github.com/<your-username>/codespaces-hermes-server.git

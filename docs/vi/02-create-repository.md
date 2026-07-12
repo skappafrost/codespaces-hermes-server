@@ -107,6 +107,8 @@ Nhấn nút **"Create repository"** (Tạo repository).
 
 ### Bước 5: Trang kết quả
 
+> ✅ **Có thể bỏ qua bước này** — chỉ mang tính thông tin. Nếu bạn đã thấy repository được tạo thành công thì không cần đọc tiếp.
+
 Sau khi tạo thành công, bạn sẽ thấy trang hướng dẫn:
 
 ```
