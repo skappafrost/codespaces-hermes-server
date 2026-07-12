@@ -70,11 +70,16 @@ You now have an empty private repository named `codespaces-hermes-server` waitin
 
 ---
 
-### 📚 Navigation
+<!-- Navigation -->
+<p align="center">
+  <a href="01-create-github-account.md">← Create a GitHub Account</a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="03-setup-devcontainer.md">Setup .devcontainer →</a>
+</p>
 
-| ← Previous | Next → |
-|:---|:---|
-| **[Create a GitHub Account ←](./01-create-github-account.md)** | **[Setup .devcontainer →](./03-setup-devcontainer.md)** |
+<p align="center">
+  <strong>Part 2 / 7</strong>
+</p>
 
 ---
 

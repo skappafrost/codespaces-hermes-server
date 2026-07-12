@@ -84,16 +84,16 @@ Repeat: **Add file** → **Create new file** with the path `.devcontainer/postCr
 # =============================================================================
 set -euo pipefail
 
-WORKSPACE="/workspaces/codespaces-hermes-server"
+WORKSPACE="$(pwd)"
 LOG_DIR="$WORKSPACE"
 TIMESTAMP=$(date)
 
-echo "=== postCreate.sh started at $TIMESTAMP ===\" >> \"$LOG_DIR/setup.log\"
+echo "=== postCreate.sh started at $TIMESTAMP ===" >> "$LOG_DIR/setup.log"
 
 # Install Hermes Agent (one-time — only runs on initial Codespace creation)
 curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 
-echo \"[INFO] Hermes Agent installed successfully.\" >> \"$LOG_DIR/setup.log\"
+echo "[INFO] Hermes Agent installed successfully." >> "$LOG_DIR/setup.log"
 ```
 
 **What this script does:**
@@ -117,36 +117,43 @@ Commit this file.
 # =============================================================================
 set -euo pipefail
 
-WORKSPACE="/workspaces/codespaces-hermes-server"
+WORKSPACE="$(pwd)"
 LOG_DIR="$WORKSPACE"
 TIMESTAMP=$(date)
 
-echo "=== postStart.sh started at $TIMESTAMP ===\" > \"$WORKSPACE/check_startup.txt\"
+echo "=== postStart.sh started at $TIMESTAMP ===" > "$WORKSPACE/check_startup.txt"
 
-export PATH=\"$PATH:/home/codespace/.local/bin\"
+export PATH="$PATH:$HOME/.local/bin"
 
-echo \"[INFO] Waiting for Codespace to stabilize...\" >> \"$LOG_DIR/startup.log\"
-sleep 20
+echo "[INFO] Waiting for Codespace to stabilize..." >> "$LOG_DIR/startup.log"
+
+# Wait loop instead of fixed sleep — checks until Hermes port is ready
+for i in {1..15}; do
+    if ss -tlnp 2>/dev/null | grep -q :9119; then
+        break
+    fi
+    sleep 2
+done
 
 # ---------------------------------------------------------------------------
 # START TAILSCALE DAEMON
 # ---------------------------------------------------------------------------
-echo \"[INFO] Starting tailscaled...\" >> \"$LOG_DIR/startup.log\"
+echo "[INFO] Starting tailscaled..." >> "$LOG_DIR/startup.log"
 
 nohup sudo tailscaled \
     --tun=userspace-networking \
     --socks5-server=localhost:1055 \
     --outbound-http-proxy-listen=localhost:1055 \
-    > \"$LOG_DIR/tailscale.log\" 2>&1 &
+    > "$LOG_DIR/tailscale.log" 2>&1 &
 
 # ---------------------------------------------------------------------------
 # WAIT FOR DOCKER
 # ---------------------------------------------------------------------------
-echo \"[INFO] Waiting for Docker...\" >> \"$LOG_DIR/startup.log\"
+echo "[INFO] Waiting for Docker..." >> "$LOG_DIR/startup.log"
 
 for i in {1..60}; do
     if docker info >/dev/null 2>&1; then
-        echo \"[INFO] Docker is ready.\" >> \"$LOG_DIR/startup.log\"
+        echo "[INFO] Docker is ready." >> "$LOG_DIR/startup.log"
         break
     fi
     sleep 2
@@ -155,11 +162,11 @@ done
 # ---------------------------------------------------------------------------
 # WAIT FOR TAILSCALE PROCESS
 # ---------------------------------------------------------------------------
-echo \"[INFO] Waiting for tailscaled process...\" >> \"$LOG_DIR/startup.log\"
+echo "[INFO] Waiting for tailscaled process..." >> "$LOG_DIR/startup.log"
 
 for i in {1..30}; do
     if pgrep tailscaled >/dev/null; then
-        echo \"[INFO] tailscaled is running.\" >> \"$LOG_DIR/startup.log\"
+        echo "[INFO] tailscaled is running." >> "$LOG_DIR/startup.log"
         break
     fi
     sleep 1
@@ -168,13 +175,13 @@ done
 # ---------------------------------------------------------------------------
 # START HERMES SERVER
 # ---------------------------------------------------------------------------
-echo \"[INFO] Starting Hermes server...\" >> \"$LOG_DIR/startup.log\"
+echo "[INFO] Starting Hermes server..." >> "$LOG_DIR/startup.log"
 
 setsid \
-/home/codespace/.local/bin/hermes serve \
+hermes serve \
     --host 0.0.0.0 \
     --port 9119 \
-    >> \"$LOG_DIR/hermes.log\" 2>&1 \
+    >> "$LOG_DIR/hermes.log" 2>&1 \
     < /dev/null &
 
 sleep 5
@@ -182,10 +189,10 @@ sleep 5
 # ---------------------------------------------------------------------------
 # VERIFY HERMES IS RUNNING
 # ---------------------------------------------------------------------------
-if pgrep -f \"hermes serve\" >/dev/null; then
-    echo \"[SUCCESS] Hermes server started successfully.\" >> \"$LOG_DIR/startup.log\"
+if pgrep -f "hermes serve" >/dev/null; then
+    echo "[SUCCESS] Hermes server started successfully." >> "$LOG_DIR/startup.log"
 else
-    echo \"[ERROR] Hermes server failed to start.\" >> \"$LOG_DIR/startup.log\"
+    echo "[ERROR] Hermes server failed to start." >> "$LOG_DIR/startup.log"
 fi
 ```
 
@@ -193,7 +200,7 @@ fi
 
 | Step | Description |
 |------|-------------|
-| 🕒 Stabilization wait | `sleep 20` — gives Codespace time to finish initializing |
+| 🕒 Stabilization wait | Wait loop (up to 30s) — checks if Hermes port 9119 is ready |
 | 🚀 Start tailscaled | Launches the Tailscale daemon in userspace networking mode |
 | 🐳 Wait for Docker | Loops until Docker is ready (up to 2 minutes) |
 | 👁️ Wait for Tailscale | Confirms the tailscaled process is actually running |
@@ -253,5 +260,5 @@ With `.devcontainer` configured, the next step is to **configure the Idle Timeou
 </p>
 
 <p align="center">
-  <strong>Part 3 / 6</strong>
+  <strong>Part 3 / 7</strong>
 </p>

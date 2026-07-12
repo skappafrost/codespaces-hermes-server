@@ -55,11 +55,14 @@ You will be redirected to your GitHub dashboard — the starting point for all y
 
 ---
 
-### 📚 Next Steps
+<!-- Navigation -->
+<p align="center">
+  <a href="02-create-repository.md">Next: Create a Repository →</a>
+</p>
 
-| ← Previous | Next → |
-|:---|:---|
-| *(Getting Started)* | **[Create a New Private Repository →](./02-create-repository.md)** |
+<p align="center">
+  <strong>Part 1 / 7</strong>
+</p>
 
 ---
 

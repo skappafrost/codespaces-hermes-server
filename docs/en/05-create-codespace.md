@@ -128,14 +128,13 @@ The free-tier Codespace comes with a **32 GB disk**, but not all of it is availa
 
 ---
 
-## 📚 Next Part
-
-➡️ **[Install Hermes & Connect Remote](06-install-hermes-connect-remote.md)** — Set up Hermes Agent server + Tailscale VPN for remote access.
-
----
-
+<!-- Navigation -->
 <p align="center">
   <a href="04-configure-idle-timeout.md">← Previous: Configure Idle Timeout</a>
   &nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="06-install-hermes-connect-remote.md">Next → Install Hermes & Connect Remote</a>
+  <a href="06-install-hermes-connect-remote.md">Next: Install Hermes & Connect Remote →</a>
+</p>
+
+<p align="center">
+  <strong>Part 5 / 7</strong>
 </p>

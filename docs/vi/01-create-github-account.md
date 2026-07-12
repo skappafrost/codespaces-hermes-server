@@ -128,12 +128,11 @@ Bạn đã tạo thành công tài khoản GitHub! Giờ đây bạn có thể:
 
 ---
 
-## 📚 Bài tiếp theo
-
-➡️ **[Tạo Repository mới (Private)](02-create-repository.md)** — Học cách tạo kho chứa mã nguồn riêng tư đầu tiên.
-
----
-
+<!-- Navigation -->
 <p align="center">
   <a href="02-create-repository.md">Next → Tạo Repository</a>
+</p>
+
+<p align="center">
+  <strong>Phần 1 / 7</strong>
 </p>

@@ -155,14 +155,13 @@ Bạn đã tạo thành công một **Repository Private** trên GitHub:
 
 ---
 
-## 📚 Bài tiếp theo
-
-➡️ **[Cấu hình .devcontainer](03-setup-devcontainer.md)** — Thiết lập môi trường phát triển với Dev Container.
-
----
+<!-- Navigation -->
+<p align="center">
+  <a href="01-create-github-account.md">← Bài 1: Tạo tài khoản</a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="03-setup-devcontainer.md">Cấu hình .devcontainer →</a>
+</p>
 
 <p align="center">
-  <a href="01-create-github-account.md">← Previous</a>
-  &nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="03-setup-devcontainer.md">Next → Cấu hình .devcontainer</a>
+  <strong>Phần 2 / 7</strong>
 </p>

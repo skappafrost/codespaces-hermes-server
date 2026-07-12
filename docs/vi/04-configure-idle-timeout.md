@@ -117,14 +117,13 @@ Sau khi lưu, bạn có thể kiểm tra lại bằng cách:
 
 ---
 
-## 📚 Tiếp theo
+<!-- Navigation -->
+<p align="center">
+  <a href="03-setup-devcontainer.md">← Bài 3: Cấu hình .devcontainer</a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="05-create-codespace.md">Bài 5: Tạo Codespace →</a>
+</p>
 
-Sau khi đã cấu hình xong Idle Timeout, bạn đã sẵn sàng để tạo Codespace:
-
-| ⏪ Bước trước | Bước hiện tại | ⏩ Bước tiếp theo |
-|--------------|---------------|-------------------|
-| [03 - Cấu hình .devcontainer](03-setup-devcontainer.md) | **04 - Cấu hình Idle Timeout** ✅ | [05 - Tạo Codespace](05-create-codespace.md) |
-
----
-
-*⬅️ [Quay lại README chính](../../README.md)*
+<p align="center">
+  <strong>Phần 4 / 7</strong>
+</p>

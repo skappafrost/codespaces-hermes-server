@@ -98,14 +98,13 @@ GitHub Free includes **120 core-hours per month**. Here's how the math works out
 
 ---
 
-## 📚 Next Part
-
-➡️ **[Create a Codespace](05-create-codespace.md)** — Launch and explore your Codespace environment.
-
----
-
+<!-- Navigation -->
 <p align="center">
   <a href="03-setup-devcontainer.md">← Previous: Set up .devcontainer</a>
   &nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="05-create-codespace.md">Next → Create a Codespace</a>
+  <a href="05-create-codespace.md">Next: Create a Codespace →</a>
+</p>
+
+<p align="center">
+  <strong>Part 4 / 7</strong>
 </p>

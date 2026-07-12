@@ -84,7 +84,7 @@ Lặp lại thao tác: **Add file** → **Create new file** với đường dẫ
 # =============================================================================
 set -euo pipefail
 
-WORKSPACE="/workspaces/codespaces-hermes-server"
+WORKSPACE="$(pwd)"
 LOG_DIR="$WORKSPACE"
 TIMESTAMP=$(date)
 
@@ -117,16 +117,23 @@ Commit file này.
 # =============================================================================
 set -euo pipefail
 
-WORKSPACE="/workspaces/codespaces-hermes-server"
+WORKSPACE="$(pwd)"
 LOG_DIR="$WORKSPACE"
 TIMESTAMP=$(date)
 
 echo "=== postStart.sh started at $TIMESTAMP ===" > "$WORKSPACE/check_startup.txt"
 
-export PATH="$PATH:/home/codespace/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 echo "[INFO] Waiting for Codespace to stabilize..." >> "$LOG_DIR/startup.log"
-sleep 20
+
+# Wait loop instead of fixed sleep — checks until Hermes port is ready
+for i in {1..15}; do
+    if ss -tlnp 2>/dev/null | grep -q :9119; then
+        break
+    fi
+    sleep 2
+done
 
 # ---------------------------------------------------------------------------
 # START TAILSCALE DAEMON
@@ -171,7 +178,7 @@ done
 echo "[INFO] Starting Hermes server..." >> "$LOG_DIR/startup.log"
 
 setsid \
-/home/codespace/.local/bin/hermes serve \
+hermes serve \
     --host 0.0.0.0 \
     --port 9119 \
     >> "$LOG_DIR/hermes.log" 2>&1 \
@@ -193,7 +200,7 @@ fi
 
 | Bước | Mô tả |
 |------|-------|
-| 🕒 Chờ ổn định | `sleep 20` — cho Codespace hoàn tất khởi tạo |
+| 🕒 Chờ ổn định | Wait loop (tối đa 30s) — kiểm tra port Hermes 9119 đã sẵn sàng |
 | 🚀 Start tailscaled | Chạy Tailscale daemon với chế độ userspace networking |
 | 🐳 Chờ Docker | Vòng lặp kiểm tra Docker đã sẵn sàng chưa (tối đa 2 phút) |
 | 👁️ Chờ Tailscale | Xác nhận tiến trình tailscaled đã chạy |
@@ -253,5 +260,5 @@ Sau khi cấu hình xong `.devcontainer`, bạn cần **cấu hình Idle Timeout
 </p>
 
 <p align="center">
-  <strong>Phần 3 / 6</strong>
+  <strong>Phần 3 / 7</strong>
 </p>

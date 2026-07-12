@@ -386,17 +386,15 @@ Your personal AI backend is now running in the cloud — accessible from anywher
 > For running a personal Hermes Agent backend, **GitHub Free is more than enough** — 120 core-hours per month gives you ~60 hours of uptime with a 2-core machine.
 
 ---
-
+<!-- Navigation -->
 <p align="center">
   <a href="05-create-codespace.md">← Previous: Create a Codespace</a>
   &nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="07-codespace-cli-management.md">Next: CLI Management →</a>
-  &nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="../../README.md">Back to Guide Home →</a>
 </p>
 
 <p align="center">
-  <strong>Part 6 / 6 — 🎉 You've completed the setup!</strong>
+  <strong>Part 6 / 7 — 🎉 You've completed the setup!</strong>
 </p>
 
 ---

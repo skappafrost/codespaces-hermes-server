@@ -27,6 +27,8 @@
 
 ### 📖 Overview
 
+![Repo Preview](assets/repo_preview.png)
+
 This project provides a **complete step-by-step guide** for running **Hermes Agent** on **free GitHub Codespaces** as your personal AI backend — accessible from anywhere.
 
 **What you'll learn:**
@@ -120,10 +122,10 @@ sudo tailscale up          # Log in to Tailscale
 tailscale ip               # Save the 100.x.x.x IP
 
 # 6. Create auth file
-cat >> ~/.hermes/.env <<'EOF'
+cat >> ~/.hermes/.env <<EOF
 HERMES_DASHBOARD_BASIC_AUTH_USERNAME=admin
 HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=<your-strong-password>
-HERMES_DASHBOARD_BASIC_AUTH_SECRET=<openssl rand -base64 32>
+HERMES_DASHBOARD_BASIC_AUTH_SECRET=$(openssl rand -base64 32)
 EOF
 chmod 600 ~/.hermes/.env
 
@@ -155,6 +157,8 @@ chmod 600 ~/.hermes/.env
 ## 🇻🇳 Tiếng Việt
 
 ### 📖 Giới thiệu
+
+![Repo Preview](assets/repo_preview.png)
 
 Dự án này cung cấp **hướng dẫn chi tiết từ A đến Z** để thiết lập **Hermes Agent** chạy trên **GitHub Codespaces** miễn phí, biến nó thành server cá nhân mà bạn có thể truy cập từ mọi nơi.
 
@@ -269,10 +273,10 @@ sudo tailscale up          # Đăng nhập Tailscale
 tailscale ip               # Ghi lại IP 100.x.x.x
 
 # 6. Tạo file auth
-cat >> ~/.hermes/.env <<'EOF'
+cat >> ~/.hermes/.env <<EOF
 HERMES_DASHBOARD_BASIC_AUTH_USERNAME=admin
 HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=<your-strong-password>
-HERMES_DASHBOARD_BASIC_AUTH_SECRET=<openssl rand -base64 32>
+HERMES_DASHBOARD_BASIC_AUTH_SECRET=$(openssl rand -base64 32)
 EOF
 chmod 600 ~/.hermes/.env
 

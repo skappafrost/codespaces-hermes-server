@@ -231,11 +231,15 @@ Trang này hiển thị danh sách tất cả Codespace bạn đang có, kèm tr
 ## 🎉 Chúc mừng!
 
 Bạn đã tạo thành công Codespace đầu tiên và đã sẵn sàng chuyển sang bước cuối cùng — cài đặt Hermes Agent và kết nối remote!
-
-| ⏪ Bước trước | Bước hiện tại | ⏩ Bước tiếp theo |
-|--------------|---------------|-------------------|
-| [04 - Cấu hình Idle Timeout](04-configure-idle-timeout.md) | **05 - Tạo Codespace** ✅ | [06 - Cài Hermes & Kết nối Remote](06-install-hermes-connect-remote.md) |
-
 ---
 
-*⬅️ [Quay lại README chính](../../README.md)*
+<!-- Navigation -->
+<p align="center">
+  <a href="04-configure-idle-timeout.md">← Bài 4: Cấu hình Idle Timeout</a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="06-install-hermes-connect-remote.md">Bài 6: Cài Hermes →</a>
+</p>
+
+<p align="center">
+  <strong>Phần 5 / 7</strong>
+</p>
