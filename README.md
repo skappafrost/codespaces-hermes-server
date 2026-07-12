@@ -4,7 +4,7 @@
 > **Run Hermes Agent as a personal AI backend on free GitHub Codespaces — 24/7, zero cost, zero maintenance.**
 
 [![GitHub Free](https://img.shields.io/badge/GitHub-Free-white?logo=github&labelColor=181717)]()
-[![Codespaces](https://img.shields.io/badge/~60h%20uptime/month%20(2--core)-white?logo=visualstudiocode&labelColor=007ACC)]()
+[![Codespaces](https://img.shields.io/badge/~60h%20uptime%20(120%20core--hours%2C%202--core)-white?logo=visualstudiocode&labelColor=007ACC)]()
 [![Hermes Agent](https://img.shields.io/badge/Hermes%20Agent-Server-white?logo=openai&labelColor=412991)]()
 [![Tailscale Free](https://img.shields.io/badge/Tailscale-Free-white?logo=tailscale&labelColor=24292F)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-white?labelColor=2ea043)]()
@@ -112,12 +112,12 @@ codespaces-hermes-server/
 # 1. Create GitHub account + private repo
 # 2. Add 3 files to .devcontainer/ (included in this repo)
 # 3. Set idle timeout → 240 min in Settings → Codespaces
-# 4. Create Codespace → wait for postCreate.sh to install Hermes
-# 5. Inside Codespace:
-curl -fsSL https://tailscale.com/install.sh | sh
-sudo tailscaled --tun=userspace-networking &
-sudo tailscale up          # Log in to Tailscale
+# 4. Create Codespace → wait for postCreate.sh to install Hermes + Tailscale
+
+# 5. Inside Codespace — ONE-TIME Tailscale auth (only needed once):
+sudo tailscale up          # Opens browser to log in
 tailscale ip               # Save the 100.x.x.x IP
+# Note: After this one-time auth, postStart.sh auto-starts tailscaled + Hermes on every restart
 
 # 6. Create auth file
 cat >> ~/.hermes/.env <<EOF
@@ -139,7 +139,7 @@ chmod 600 ~/.hermes/.env
 |---------|-------------|------------|
 | Private repos | ✅ Unlimited | ✅ Unlimited |
 | Collaborators on private repos | ✅ Up to 3 | ✅ Unlimited |
-| Codespaces (2-core) | **~60 hours/month** | 180 core-hours |
+| Codespaces (2-core) | **~60h uptime (120 core-hours)** | **180 core-hours** |
 | GitHub Actions minutes/month | 2,000 min | 3,000 min |
 
 > For running a personal Hermes Agent backend, **GitHub Free is more than enough**.
@@ -261,12 +261,12 @@ codespaces-hermes-server/
 # 1. Tạo GitHub account + private repo
 # 2. Thêm 3 file vào .devcontainer/ (có sẵn trong repo này)
 # 3. Set idle timeout → 240 phút trong Settings → Codespaces
-# 4. Tạo Codespace → đợi postCreate.sh cài Hermes
-# 5. Trong Codespace:
-curl -fsSL https://tailscale.com/install.sh | sh
-sudo tailscaled --tun=userspace-networking &
-sudo tailscale up          # Đăng nhập Tailscale
+# 4. Tạo Codespace → đợi postCreate.sh cài Hermes + Tailscale
+
+# 5. Trong Codespace — XÁC THỰC Tailscale 1 LẦN (chỉ cần làm 1 lần):
+sudo tailscale up          # Mở browser để đăng nhập
 tailscale ip               # Ghi lại IP 100.x.x.x
+# Lưu ý: Sau lần auth đầu, postStart.sh sẽ tự động start tailscaled + Hermes mỗi lần restart
 
 # 6. Tạo file auth
 cat >> ~/.hermes/.env <<EOF
@@ -288,7 +288,7 @@ chmod 600 ~/.hermes/.env
 |-----------|-------------|------------|
 | Repo private | ✅ Không giới hạn | ✅ Không giới hạn |
 | Cộng tác viên trên private repo | ✅ Tối đa 3 người | ✅ Không giới hạn |
-| Codespaces (2-core) | **~60 giờ/tháng** | 180 core-hours |
+| Codespaces (2-core) | **~60h uptime (120 core-hours)** | **180 core-hours** |
 | GitHub Actions phút/tháng | 2,000 phút | 3,000 phút |
 
 > Với mục đích chạy Hermes Agent cá nhân, **GitHub Free là hoàn toàn đủ**.

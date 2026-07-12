@@ -11,17 +11,8 @@ TIMESTAMP=$(date)
 
 echo "=== postStart.sh started at $TIMESTAMP ===" > "$WORKSPACE/check_startup.txt"
 
-export PATH="$PATH:$HOME/.local/bin"
-
-echo "[INFO] Waiting for Codespace to stabilize..." >> "$LOG_DIR/startup.log"
-
-# Wait loop instead of fixed sleep — checks until Hermes port is ready
-for _ in {1..15}; do
-    if ss -tlnp 2>/dev/null | grep -q :9119; then
-        break
-    fi
-    sleep 2
-done
+# Hermes can be installed to /root/.local/bin (root) or /home/codespace/.local/bin
+export PATH="$PATH:$HOME/.local/bin:/root/.local/bin"
 
 # ---------------------------------------------------------------------------
 # START TAILSCALE DAEMON
@@ -30,22 +21,7 @@ echo "[INFO] Starting tailscaled..." >> "$LOG_DIR/startup.log"
 
 nohup sudo tailscaled \
     --tun=userspace-networking \
-    --socks5-server=localhost:1055 \
-    --outbound-http-proxy-listen=localhost:1055 \
     > "$LOG_DIR/tailscale.log" 2>&1 &
-
-# ---------------------------------------------------------------------------
-# WAIT FOR DOCKER
-# ---------------------------------------------------------------------------
-echo "[INFO] Waiting for Docker..." >> "$LOG_DIR/startup.log"
-
-for _ in {1..60}; do
-    if docker info >/dev/null 2>&1; then
-        echo "[INFO] Docker is ready." >> "$LOG_DIR/startup.log"
-        break
-    fi
-    sleep 2
-done
 
 # ---------------------------------------------------------------------------
 # WAIT FOR TAILSCALE PROCESS
@@ -61,16 +37,18 @@ for _ in {1..30}; do
 done
 
 # ---------------------------------------------------------------------------
-# START HERMES SERVER
+# START HERMES SERVER (guard: don't spawn duplicate)
 # ---------------------------------------------------------------------------
 echo "[INFO] Starting Hermes server..." >> "$LOG_DIR/startup.log"
 
-setsid \
-hermes serve \
-    --host 0.0.0.0 \
-    --port 9119 \
-    >> "$LOG_DIR/hermes.log" 2>&1 \
-    < /dev/null &
+if ! pgrep -f "hermes serve" >/dev/null; then
+    setsid \
+    hermes serve \
+        --host 127.0.0.1 \
+        --port 9119 \
+        >> "$LOG_DIR/hermes.log" 2>&1 \
+        < /dev/null &
+fi
 
 sleep 5
 
