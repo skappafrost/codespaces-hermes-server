@@ -17,7 +17,7 @@ Mặc định, GitHub Codespaces sẽ **tự động tắt sau 30 phút không h
 | 🔄 **Phải restart thường xuyên** | Mỗi lần tắt bạn phải vào GitHub khởi động lại, mất thời gian chờ boot |
 | 💸 **Lãng phí dung lượng** | Mỗi lần dừng/rồi chạy lại không tận dụng được tài nguyên đã cấp phát |
 
-> ⚠️ **CẢNH BÁO QUAN TRỌNG:** Thiết lập này **phải được thực hiện trước khi tạo Codespace lần đầu tiên**. Nếu bạn đã tạo Codespace rồi mới quay lại cấu hình, idle timeout mới sẽ **chỉ có hiệu lực cho lần khởi động Codespace tiếp theo** — không áp dụng cho phiên đang chạy.
+> ⚠️ **CẢNH BÁO QUAN TRỌNG:** Thiết lập này **phải được thực hiện trước khi tạo Codespace lần đầu tiên**. Idle timeout mới **chỉ có hiệu lực cho Codespace được tạo SAU KHI** bạn cấu hình. Nếu bạn đã tạo Codespace trước đó, bạn phải **xoá và tạo lại** — restart Codespace sẽ **không** áp dụng idle timeout mới.
 
 ---
 
@@ -111,7 +111,7 @@ Sau khi lưu, bạn có thể kiểm tra lại bằng cách:
 | Lỗi | Nguyên nhân | Cách khắc phục |
 |-----|-------------|----------------|
 | Không thấy mục Codespaces trong Settings | Chưa kích hoạt Codespaces | Chỉ cần tạo Codespace lần đầu là mục này xuất hiện |
-| Idle timeout không áp dụng cho Codespace đang chạy | Thiết lập chỉ có hiệu lực cho lần start tiếp theo | Stop rồi Start lại Codespace |
+| Idle timeout không áp dụng cho Codespace đang chạy | Thiết lập chỉ có hiệu lực cho Codespace được tạo **sau khi** cấu hình | Xoá Codespace cũ → tạo lại Codespace mới |
 | Giá trị không lưu được | Lỗi mạng hoặc session hết hạn | Refresh trang và thử lại |
 | Không thể nhập giá trị > 240 | GitHub Free giới hạn tối đa 480 phút | 240 phút là đủ dùng, không cần cao hơn |
 

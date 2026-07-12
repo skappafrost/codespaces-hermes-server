@@ -51,7 +51,7 @@ The dropdown offers several options — scroll down until you find **240 minutes
 
 Click the **Save** button to apply the change.
 
-> ✅ The setting takes effect immediately for any new Codespace created from this point onward.
+> ✅ **Important:** The setting takes effect **only for new Codespaces created after this change**. Any Codespace that was already created before this setting was saved must be **deleted and recreated** — simply restarting will **not** apply the new timeout.
 
 ---
 
