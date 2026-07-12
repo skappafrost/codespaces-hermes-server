@@ -1,79 +1,138 @@
 # Create a GitHub Account
 
-> **⏰ Time:** 5 minutes · **💰 Cost:** Free · **🔧 Level:** Beginner
+<p align="center">
+  <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" width="120"/>
+</p>
+
+<p align="center">
+  <span style="display: inline-block; background: #28a745; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; margin: 0 4px;">⏰ 5 minutes</span>
+  <span style="display: inline-block; background: #6f42c1; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; margin: 0 4px;">💰 Free</span>
+</p>
+
+Step-by-step guide to creating a GitHub account to start your programming and source code management journey.
 
 ---
 
-![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
+## 📋 Requirements
 
-A GitHub account is your gateway to the world of open-source collaboration, version control, and code hosting. Follow these steps to create one.
-
----
-
-## Step 1: Visit GitHub
-
-Open your browser and go to **[https://github.com](https://github.com)**
-
-You'll land on the GitHub homepage with a **Sign up** button in the top-right corner.
+| Requirement | Details |
+|-------------|---------|
+| 🌐 Web browser | Chrome, Edge, Firefox, or Safari |
+| 📧 Email | A valid email address (not already registered with GitHub) |
+| 🔐 Password | At least 8 characters, including uppercase, lowercase, and numbers |
+| 👤 Username | Only letters, numbers, and hyphens (must be unique) |
 
 ---
 
-## Step 2: Sign Up
+## 🚀 Steps
 
-1. Click the **Sign up** button (top-right corner of the page)
-2. Enter your **email address** → Click **Continue**
-3. Create a **strong password** (minimum 8 characters, must include at least one uppercase letter, one number, and one special character)
-4. Choose a **username** — this will be your public GitHub identity (e.g., `yourname`)
-5. Complete the **captcha** verification (if prompted)
-6. Check your email inbox for the verification code from GitHub, then enter it on the confirmation page
+### Step 1: Visit GitHub
 
-> 💡 **Tip:** Use a personal email address (not a school/work address that might expire) so you never lose access to your account.
+Open your browser and navigate to:
+
+👉 **[https://github.com](https://github.com)**
+
+You will see the GitHub homepage with a **"Sign up"** button in the top-right corner.
 
 ---
 
-## Step 3: Choose the Free Plan
+### Step 2: Fill in Registration Details
 
-- On the plan selection page, click **Continue for free**
-- **No credit card is required** — the free plan includes unlimited public and private repositories
+On the sign-up page, enter the following information:
+
+| Field | Instructions |
+|-------|-------------|
+| **Email** | Enter the email address you want to use. **Important:** This email will be used to log in and receive notifications. |
+| **Password** | Create a strong password (at least 8 characters, including uppercase, lowercase, and numbers) |
+| **Username** | Choose a unique username. This will be your GitHub address (e.g., `github.com/your-name`) |
+| **Email preferences** | Choose **Y** (yes) if you want to receive product update emails, or **N** (no) if you only want essential emails |
+
+> ⚠️ **Note:** Your username is permanent — choose a professional name you'll be happy with long-term.
+
+After filling in the fields, click the **Continue** button.
+
+---
+
+### Step 3: Verification (CAPTCHA)
+
+GitHub will ask you to verify that you are not a robot:
+
+1. Complete the **CAPTCHA** test (usually selecting images or ticking a confirmation box)
+2. Click **Create account**
+
+---
+
+### Step 4: Email Confirmation
+
+GitHub will send a confirmation code to your email:
+
+1. **Open your email inbox**
+2. **Find the email** from GitHub with the subject "[GitHub] Please verify your email address"
+3. **Enter the 8-digit code** into the confirmation field on the GitHub page
+4. Click **Verify**
+
+> ⏳ The email may take 1-2 minutes to arrive. Also check your **Spam/Junk** folder if you don't see it in your main inbox.
+
+---
+
+### Step 5: Choose the Free Plan
+
+After confirming your email, you will see the plan selection page:
+
+1. Select **"Free"** (the free plan)
+2. Click **Continue**
 
 The Free plan includes:
 
 | Feature | Free Plan |
 |---------|:--------:|
-| Unlimited public & private repositories | ✅ |
+| Unlimited repositories (Public/Private) | ✅ |
 | Unlimited collaborators | ✅ |
 | GitHub Actions (2,000 min/month) | ✅ |
-| GitHub Pages (free static sites) | ✅ |
+| GitHub Pages (free static websites) | ✅ |
 | Codespaces (120 core-hours — ~60h uptime with 2-core) | ✅ |
 
 ---
 
-## Step 4: Complete Onboarding
+### Step 6: Complete Onboarding
 
-GitHub will ask a few optional questions about your experience level and how you plan to use the platform. You can:
+GitHub will ask a few setup questions:
 
-- Answer the questions to get personalised suggestions, **or**
-- Click **Skip personalization** at the bottom to go straight to your dashboard
+1. **Team size:** Choose "Just me" or as appropriate for your needs
+2. **Programming experience:** Select your level (Beginner / Intermediate / Professional)
+3. **Interests:** Choose topics you want to follow
+4. Click **Complete setup**
 
-Finally, click **Complete setup** or **Finish**.
+> 💡 **Tip:** You can skip the onboarding questions and answer them later by clicking **"Skip personalization"**.
 
 ---
 
-## ✅ Done! You now have a GitHub Account.
+## ✅ Result
 
-You will be redirected to your GitHub dashboard — the starting point for all your projects.
+Once completed, you will be taken to your GitHub **Dashboard**:
+
+- 🔗 Profile URL: `https://github.com/your-name`
+- 📊 The Dashboard shows your repositories and recent activity
+- ⚙️ You can access Settings to customize further
+
+---
+
+## 🎉 Congratulations!
+
+You have successfully created a GitHub account! Now you can:
+
+- 📦 Create repositories to manage source code
+- 🤝 Contribute to open-source projects
+- 🚀 Deploy applications with GitHub Pages
+- 👥 Collaborate with teammates
 
 ---
 
 <!-- Navigation -->
 <p align="center">
-  <a href="02-create-repository.md">Next: Create a Repository →</a>
+  <a href="02-create-repository.md">Next → Create a Repository</a>
 </p>
 
 <p align="center">
   <strong>Part 1 / 7</strong>
 </p>
-
----
-
-*Got questions? Visit [GitHub's official help documentation](https://docs.github.com/en/get-started).*

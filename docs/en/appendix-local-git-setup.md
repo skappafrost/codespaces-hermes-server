@@ -1,6 +1,6 @@
-# Local Git Setup & GitHub Authentication
+# Git & GitHub Setup on Local Machine
 
-> ⚙️ One-time setup — you won't need to repeat this.
+> ⚙️ **One-time only** — no need to repeat later.
 
 ## Install Git (if not installed)
 
@@ -18,7 +18,7 @@ Open **Git Bash** (or terminal) and run:
 
 ```bash
 git config --global user.name "Your Name"
-git config --global user.email "your@email.com"
+git config --global user.email "email@used-to-register-for-github.com"
 ```
 
 Example:
@@ -29,11 +29,11 @@ git config --global user.email "skappafrost@gmail.com"
 
 ## Authenticate with GitHub
 
-### Option A — Personal Access Token (recommended)
+### Option A — Token (recommended)
 
 1. Go to **https://github.com/settings/tokens** → **Generate new token (classic)**
 2. Tick scopes: `repo` (full), `workflow`, `admin:org`
-3. Click **Generate token** → **Copy the token immediately** (it cannot be viewed later)
+3. Click **Generate token** → **Copy the token immediately** (cannot be viewed after closing)
 4. Use this token as your password when pushing
 
 ### Option B — GitHub CLI
@@ -52,7 +52,7 @@ Choose:
 - `Paste an authentication token` (use the token from Option A)
 - or `Login with a web browser`
 
-## Push Code for the First Time
+## Push Code to GitHub for the First Time
 
 ```bash
 cd /path/to/codespaces-hermes-server
@@ -64,4 +64,4 @@ git remote add origin https://github.com/[USERNAME]/codespaces-hermes-server.git
 git push -u origin main
 ```
 
-> 🔐 If prompted for a password, use your **Personal Access Token** instead of your GitHub password.
+> 🔐 If prompted for a password, use **Personal Access Token** instead of GitHub password.

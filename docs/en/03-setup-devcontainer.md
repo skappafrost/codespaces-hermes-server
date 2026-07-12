@@ -1,7 +1,5 @@
 # Set up .devcontainer for Codespace
 
-> **⏰ Time:** 5 minutes · **💰 Cost:** Free · **🔧 Level:** Beginner
-
 In this section, you'll create **3 configuration files** inside the `.devcontainer/` directory of your GitHub repository. These files tell Codespace how to automatically install Hermes Agent and launch the server every time you start it.
 
 ---

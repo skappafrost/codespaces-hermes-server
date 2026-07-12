@@ -7,7 +7,6 @@
 ## 📌 Why GitHub CLI?
 
 After setting up your Hermes server on Codespace, you'll regularly need to:
-
 - 🔄 **Start Codespace** when you need Hermes
 - ⏹️ **Stop Codespace** to save core-hours
 - 📋 **Check status** — is your Codespace running or shut down?
@@ -39,6 +38,7 @@ brew install gh
 #### 🐧 Linux (Ubuntu/Debian)
 
 ```bash
+# Using apt
 (type -p curl >/dev/null || sudo apt-get install curl -y)
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
 sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
@@ -86,11 +86,13 @@ Follow the prompts:
 6. Paste the code → **Continue** → **Authorize GitHub CLI**
 7. ✅ **Done!** Terminal shows `✓ Authentication complete.`
 
-> 💡 **Tip:** If you're inside a Codespace (no GUI browser), choose **Paste an authentication token** and use a Personal Access Token (see [Appendix](appendix-local-git-setup.md) for instructions).
+> 💡 **Tip:** If you're inside a Codespace (no GUI browser), choose **Paste an authentication token** and use a Personal Access Token (see [Appendix](appendix-local-git-setup.md)).
 
 ---
 
 ### Step 3: Essential Codespace CLI Commands
+
+Here are the `gh` commands you'll use regularly:
 
 #### 👁️ List Codespaces
 
@@ -131,13 +133,13 @@ gh codespace stop
 
 > 💡 **Save core-hours:** Always run this when you're done using Hermes.
 
-#### 🗑️ Delete Codespace (permanent)
+#### 🗑️ Delete Codespace (when no longer needed)
 
 ```bash
 gh codespace delete
 ```
 
-> ⚠️ Deleting a Codespace removes **all data inside it**. Hermes config, skills, memory — all gone! Only delete if you've done a backup (`hermes backup`).
+> ⚠️ Deleting a Codespace will lose all data on it. **Hermes config, skills, memory — all gone!** Only delete if you've backed up.
 
 #### 🔐 SSH into Codespace
 
@@ -192,7 +194,7 @@ echo === Done! Core-hours saved. ===
 pause
 ```
 
-> Place these on your desktop or in `C:\Users\<name>\` for quick access.
+> Place these on your desktop or in `C:\\Users\\<name>\\` for quick access.
 
 #### 🪟 Windows — Advanced PowerShell Script
 
@@ -381,12 +383,10 @@ echo "🎉 Done! Open Hermes Desktop or CLI to connect."
 |-----------|----------|
 | **Keep forgetting to stop — burning core-hours** | Put `cs-stop` alias at the top of your `~/.bashrc` so it's always visible |
 | **"no codespace" error** | Run `gh codespace create --repo codespaces-hermes-server` first |
-| **`gh` command not found** | Upgrade: `gh upgrade` or reinstall from https://cli.github.com/ |
+| **`gh` command not found** | Upgrade: `gh upgrade` or reinstall |
 | **Multiple Codespaces running** | Use `gh codespace list` to find names, `gh codespace stop -c <name>` to stop specific one |
 | **SSH without remembering the name** | `gh codespace ssh` shows an interactive menu |
-| **Accidentally deleted Codespace** | Cannot undo. Always backup Hermes first (`hermes backup`) |
-| **Want to see core-hours usage** | Visit https://github.com/settings/billing (scroll to Codespaces section) |
-| **Codespace stuck "Creating"** | Wait 3 minutes. If still stuck, delete and create a new one |
+| **Accidentally deleted Codespace** | Cannot undo. Always backup Hermes before deleting (`hermes backup`) |
 
 ---
 
@@ -408,7 +408,6 @@ echo "🎉 Done! Open Hermes Desktop or CLI to connect."
 
 - ⬅️ [Part 6: Install Hermes & Connect Remote](06-install-hermes-connect-remote.md)
 - 📘 [Appendix: Local Git Setup](appendix-local-git-setup.md)
-- 🌐 Visit [GitHub CLI Manual](https://cli.github.com/manual) for all available commands
 
 ---
 

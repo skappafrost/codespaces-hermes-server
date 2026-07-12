@@ -1,108 +1,120 @@
-# Configure Codespace Idle Timeout
+# Configure Idle Timeout for Codespace
 
-<p align="center">
-  <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" width="120"/>
-</p>
-
-<p align="center">
-  <span style="display: inline-block; background: #d29922; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; margin: 0 4px;">⏰ 2 minutes</span>
-  <span style="display: inline-block; background: #cb2431; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; margin: 0 4px;">⚠️ Must do BEFORE creating your first Codespace</span>
-</p>
-
-Step-by-step guide to increasing the Codespace idle timeout from the default 30 minutes to 240 minutes (4 hours).
+> ⏱️ **Duration:** 2 minutes &nbsp;|&nbsp; 🎯 **Goal:** Increase idle timeout from 30 minutes to 240 minutes
 
 ---
 
-## 📋 Prerequisites
+## 📌 Why Increase Idle Timeout?
 
-| Requirement | Details |
-|-------------|---------|
-| ✅ GitHub account | Created and logged in (see [Part 1](01-create-github-account.md)) |
-| ✅ Private repository | Created (see [Part 2](02-create-repository.md)) |
-| 🌐 Web browser | Chrome, Edge, Firefox, or Safari |
+By default, GitHub Codespaces will **automatically shut down after 30 minutes of inactivity** (idle). This is a very short period and is unsuitable when running Hermes Agent as a personal server.
 
----
+**Problems with the default 30 minutes:**
 
-## 🚀 Steps
+| Problem | Description |
+|---------|-------------|
+| 🛑 **Codespace shuts down constantly** | Just leave the keyboard for a few minutes and the Hermes server stops working |
+| 📉 **Loss of connection** | Hermes Desktop/CLI cannot remote into the Codespace when it's off |
+| 🔄 **Frequent restarts** | Each time it shuts down you have to go to GitHub to restart, wasting boot time |
+| 💸 **Wasted capacity** | Each stop/restart doesn't take advantage of already allocated resources |
 
-### Step 1: Navigate to Codespaces Settings
-
-Go to your repository on GitHub, then:
-
-1. Click the **Settings** tab (top navigation bar)
-2. In the left sidebar, expand **Code and automation**
-3. Click **Codespaces**
-
-> 💡 **Tip:** You can also reach this page directly at `https://github.com/settings/codespaces` for global settings, or navigate through your repo's Settings for per-repository settings.
+> ⚠️ **IMPORTANT WARNING:** This setting **must be configured BEFORE creating a Codespace for the first time**. The new idle timeout **only takes effect for Codespaces created AFTER** you configure it. If you already created a Codespace, you must **delete and recreate it** — restarting the Codespace will **NOT** apply the new idle timeout.
 
 ---
 
-### Step 2: Set the Idle Timeout
+## 🛠️ Steps
 
-| Field | Setting |
-|-------|---------|
-| **Idle timeout** | ⬇️ Open the dropdown and select **240 minutes** |
+### Step 1: Open GitHub Settings
 
-The dropdown offers several options — scroll down until you find **240 minutes** (4 hours).
+1. Log in to [github.com](https://github.com)
+2. Click your **avatar** in the top-right corner
+3. Select **Settings** from the dropdown menu
 
----
+### Step 2: Go to Codespaces
 
-### Step 3: Save
+1. In the left sidebar of the Settings page, scroll down
+2. Click **Codespaces** (under **Code, planning, and automation**)
 
-Click the **Save** button to apply the change.
+### Step 3: Adjust Idle Timeout
 
-> ✅ **Important:** The setting takes effect **only for new Codespaces created after this change**. Any Codespace that was already created before this setting was saved must be **deleted and recreated** — simply restarting will **not** apply the new timeout.
-
----
-
-## ❓ Why Change the Timeout?
-
-The **default idle timeout is only 30 minutes** — very short. If your Codespace sits idle for half an hour (e.g., while you're reading docs, taking a break, or working in another window), it shuts down automatically.
-
-By raising it to **240 minutes (4 hours)**, you give yourself enough time for a full work session without unexpected interruptions.
-
-| Timeout | Behavior |
-|---------|----------|
-| ⏳ **30 min** (default) | Codespace shuts down after 30 min of inactivity |
-| ✅ **240 min** (recommended) | Codespace stays alive for up to 4 hours of inactivity |
-
-> ⚠️ **Important:** The Codespace still shuts down after the timeout even if you have unsaved work — make sure your editor autosaves or you save frequently.
+1. Find the **Default idle timeout** setting
+2. Enter the value **`240`** (minutes) — equivalent to **4 hours**
+3. Click the **Save** button to save
 
 ---
 
-## 💡 Core-Hours Math
+## 🔢 Idle Timeout Option Details
 
-GitHub Free includes **120 core-hours per month**. Here's how the math works out:
+GitHub Codespaces allows you to configure idle timeout in the range:
 
-| Setting | Calculation | Result |
-|---------|-------------|--------|
-| Idle timeout | 240 min = 4 hours | — |
-| Codespace spec | 2-core machine | — |
-| Daily usage | 4 hours/day | — |
-| Monthly consumption | 4 h × 2 cores × 30 days = 240 core-hours | ❌ Over limit |
-| **Recommended daily limit** | ~4 hours/day on a **2-core** machine | ✅ ~120 core-hours |
+| Value | Suitable for | Notes |
+|-------|-------------|-------|
+| **5–30 minutes** | Learning, quick experiments | ⚠️ Too short for Hermes server |
+| **30–60 minutes** | Short coding sessions | ⚠️ May still shut down mid-session |
+| **240 minutes (max — recommended)** | Hermes server, background tasks | ✅ Best for long uptime |
 
-**Practical tip:** A 2-core Codespace running 4 hours/day uses roughly 120 core-hours/month, fitting comfortably within the Free tier. If you need more time, consider stopping the Codespace when you're done instead of letting it idle.
+> 💡 **Tip:** 240 minutes is the sweet spot — long enough for Hermes to stay online when you need it, but short enough for the Codespace to auto-shut down if you forget, avoiding wasted core-hours.
 
 ---
 
-## 🎯 Summary
+## ⏰ Core-Hours: Understand to Save
 
-| Item | Value |
-|------|-------|
-| 🔧 Setting | Idle Timeout |
-| ⏱️ New value | **240 minutes** (4 hours) |
-| ⏱️ Old value | 30 minutes (default) |
-| 💰 Cost | Free — this is a setting, not a paid feature |
-| 💡 Benefit | Prevents premature shutdown during work sessions |
+### GitHub Free gives you **120 core-hours / month**
+
+Each Codespace you create consumes core-hours based on:
+- **Number of CPU cores** of the VM
+- **Uptime** (including idle, unless shut down by timeout)
+
+**How core-hours are calculated:**
+
+```
+Core-hours = (Number of cores) × (Hours of runtime)
+```
+
+Example:
+- 2-core Codespace running 4 hours/day = 8 core-hours/day
+- 30 days × 8 = 240 core-hours → **exceeds Free quota**
+- But the Codespace will **auto-shut down after 240 minutes idle** → significant savings
+
+### Tips to save core-hours
+
+| Tip | Details |
+|-----|---------|
+| ✅ **Use a 2-core machine** | Choose a 2-core machine instead of 4-core or 8-core — enough to run Hermes Agent |
+| ✅ **240-min idle timeout** | Not too short (loses connection), not too long (wastes resources) |
+| ✅ **Stop when not in use** | If you know you won't use it for 8+ hours, proactively Stop the Codespace |
+| ✅ **Monitor usage** | Go to Settings → Codespaces → see **Monthly included usage** |
+| ❌ **Don't run multiple Codespaces at once** | Each Codespace consumes its own core-hours |
+
+---
+
+## 🔍 Verify Saved Configuration
+
+After saving, you can verify by:
+
+1. Go back to **Settings → Codespaces**
+2. Look at the **Default idle timeout** setting
+3. The displayed value will be **240 minutes**
+
+> ✅ **Confirmed:** Configuration saved successfully! Now you can move on to the next step.
+
+---
+
+## ❌ Common Errors
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| Can't find Codespaces in Settings | Codespaces not yet activated | Just create a Codespace once and this section appears |
+| Idle timeout doesn't apply to running Codespace | Setting only applies to Codespaces created **after** configuration | Delete old Codespace → create new Codespace |
+| Value won't save | Network error or session expired | Refresh the page and try again |
+| Can't enter a value > 240 | GitHub Free limits max to 240 minutes | Choose a value ≤ 240 |
 
 ---
 
 <!-- Navigation -->
 <p align="center">
-  <a href="03-setup-devcontainer.md">← Previous: Set up .devcontainer</a>
+  <a href="03-setup-devcontainer.md">← Lesson 3: Configure .devcontainer</a>
   &nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="05-create-codespace.md">Next: Create a Codespace →</a>
+  <a href="05-create-codespace.md">Lesson 5: Create a Codespace →</a>
 </p>
 
 <p align="center">
