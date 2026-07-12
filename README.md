@@ -160,7 +160,7 @@ chmod 600 ~/.hermes/.env
 |-----------|-------------|------------|
 | Repo private | ✅ Không giới hạn | ✅ Không giới hạn |
 | Cộng tác viên trên private repo | ✅ Tối đa 3 người | ✅ Không giới hạn |
-| Codespaces core-hours/tháng | 120 core-hours (~60h với 2-core) | 180 core-hours |
+| Codespaces (2-core) | **~60 giờ/tháng** | 180 core-hours |
 | GitHub Actions phút/tháng | 2,000 phút | 3,000 phút |
 
 > Với mục đích chạy Hermes Agent cá nhân, **GitHub Free là hoàn toàn đủ**.
@@ -289,7 +289,7 @@ chmod 600 ~/.hermes/.env
 |---------|-------------|------------|
 | Private repos | ✅ Unlimited | ✅ Unlimited |
 | Collaborators on private repos | ✅ Up to 3 | ✅ Unlimited |
-| Codespaces core-hours/month | 120 core-hours (~60h on 2-core) | 180 core-hours |
+| Codespaces (2-core) | **~60 hours/month** | 180 core-hours |
 | GitHub Actions minutes/month | 2,000 min | 3,000 min |
 
 > For running a personal Hermes Agent backend, **GitHub Free is more than enough**.
