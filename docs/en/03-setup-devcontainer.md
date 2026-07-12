@@ -193,22 +193,24 @@ Commit this file.
 
 ---
 
+> ⚠️ **First-time startup note:** When you create a new Codespace, `postCreate.sh` installs Hermes + Tailscale, and `postStart.sh` also runs on the very first boot. If you see `[ERROR] Hermes server failed to start` in the logs, don't worry — this can happen if:
+> - The Hermes install in `postCreate.sh` hasn't finished yet
+> - You haven't created `~/.hermes/.env` with auth credentials yet (you'll do that later)
+> 
+> **Just continue with the guide.** After you complete the remaining steps (auth setup + Tailscale login), restart the Codespace once and everything will work.
+
+---
+
 ## 📂 Resulting Directory Structure
 
 After creating all 3 files, your repository should look like this:
 
-```
+```text
 codespaces-hermes-server/
-├── .devcontainer/
-│   ├── devcontainer.json       # Config: calls postCreate.sh + postStart.sh
-│   ├── postCreate.sh           # Installs Hermes Agent (one-time)
-│   └── postStart.sh            # Starts Tailscale + Hermes serve (every restart)
-├── docs/
-│   └── en/                     # English guide
-├── .gitignore
-├── LICENSE
-├── README.md
-└── SECURITY.md
+└── .devcontainer/
+    ├── devcontainer.json       # Config: calls postCreate.sh + postStart.sh
+    ├── postCreate.sh           # Installs Hermes Agent (one-time)
+    └── postStart.sh            # Starts Tailscale + Hermes serve (every restart)
 ```
 
 ---

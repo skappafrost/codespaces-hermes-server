@@ -29,8 +29,6 @@ Bạn sẽ thao tác trực tiếp trên giao diện web của GitHub — không
 1. Mở trình duyệt, đăng nhập [github.com](https://github.com)
 2. Vào repository bạn đã tạo ở phần trước (ví dụ: `codespaces-hermes-server`)
 
-![Repository trên GitHub](https://docs.github.com/assets/cb-20363/images/help/repository/repository-actions-tab.png)
-
 ### Bước 2: Tạo thư mục `.devcontainer/`
 
 1. Click nút **Add file** → **Create new file**
@@ -193,22 +191,24 @@ Commit file này.
 
 ---
 
+> ⚠️ **Lưu ý lần đầu chạy Codespace:** Khi bạn tạo Codespace mới, `postCreate.sh` sẽ cài Hermes + Tailscale, và `postStart.sh` cũng chạy luôn trong lần boot đầu tiên. Nếu bạn thấy `[ERROR] Hermes server failed to start` trong log, đừng lo — điều này có thể xảy ra nếu:
+> - Tiến trình cài Hermes trong `postCreate.sh` chưa hoàn tất
+> - Bạn chưa tạo file `~/.hermes/.env` với thông tin auth (sẽ làm ở bước sau)
+> 
+> **Cứ tiếp tục làm theo hướng dẫn.** Sau khi hoàn thành các bước còn lại (tạo auth + đăng nhập Tailscale), restart Codespace 1 lần là mọi thứ sẽ chạy ổn.
+
+---
+
 ## 📂 Cấu trúc thư mục sau khi hoàn tất
 
 Sau khi tạo 3 file, repository của bạn sẽ trông như thế này:
 
-```
+```text
 codespaces-hermes-server/
-├── .devcontainer/
-│   ├── devcontainer.json       # Config: gọi postCreate.sh + postStart.sh
-│   ├── postCreate.sh           # Cài Hermes Agent (1 lần)
-│   └── postStart.sh            # Khởi động Tailscale + Hermes serve (mỗi lần start)
-├── docs/
-│   └── vi/                     # Hướng dẫn tiếng Việt
-├── .gitignore
-├── LICENSE
-├── README.md
-└── SECURITY.md
+└── .devcontainer/
+    ├── devcontainer.json       # Config: gọi postCreate.sh + postStart.sh
+    ├── postCreate.sh           # Cài Hermes Agent (1 lần)
+    └── postStart.sh            # Khởi động Tailscale + Hermes serve (mỗi lần start)
 ```
 
 ---
