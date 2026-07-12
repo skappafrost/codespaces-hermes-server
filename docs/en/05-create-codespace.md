@@ -39,14 +39,9 @@ Open your browser and navigate to your repository on GitHub.
 
 Click **Create codespace on main** (or **New codespace** if you've created one before).
 
-After clicking, you'll be prompted to choose a **machine type**:
+> 💡 The default machine is **2 core — 8GB RAM**. To change it after creation, go to **https://github.com/codespaces** → click **`...`** → **Change machine type**. Free tier only offers 2 options: 2-core (8GB) or 4-core (8GB).
 
-| Option | CPU | RAM | Best for |
-|--------|-----|-----|----------|
-| **2-core** 💡 | 2 vCPU | 8 GB | **Hermes + Tailscale (recommended)** |
-| **4-core** | 4 vCPU | 8 GB | Heavier workloads, uses 2× core-hours |
-
-> ⏳ **Wait 30 seconds to 2 minutes** while GitHub provisions a virtual machine for you. The first launch is the slowest because it builds the container image; subsequent launches are faster thanks to caching.
+> ⏳ **Wait 30 seconds to 2 minutes** while GitHub provisions a virtual machine. The first launch is the slowest because it builds the container image; subsequent launches are faster thanks to caching.
 
 ---
 

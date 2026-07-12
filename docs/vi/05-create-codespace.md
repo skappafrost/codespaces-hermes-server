@@ -37,16 +37,13 @@ Hãy đảm bảo bạn đã hoàn thành các bước trước:
 
 ![Tạo Codespace từ repository](https://docs.github.com/assets/cb-103541/mw-1440/images/help/codespaces/codespaces-options.png)
 
-### Bước 3: Chọn cấu hình máy
+### Bước 3: Tạo Codespace
 
-Sau khi click **Create codespace on main**, GitHub sẽ hiển thị tùy chọn cấu hình máy:
+Click **Create codespace on main** (hoặc **New codespace** nếu đã tạo trước đó).
 
-| Tùy chọn | Core | RAM | Phù hợp |
-|----------|------|-----|---------|
-| **2-core** 💡 | 2 vCPU | 8 GB | **Hermes Agent + Tailscale (khuyến nghị)** |
-| **4-core** | 4 vCPU | 8 GB | Dự án nặng hơn, tốn core-hours gấp đôi |
+> 💡 Mặc định Codespace dùng máy **2 core — 8GB RAM**. Nếu muốn đổi, sau khi tạo xong vào **https://github.com/codespaces** → click **`...`** → **Change machine type**. Free tier chỉ có 2 lựa chọn: 2-core (8GB) hoặc 4-core (8GB).
 
-> 💡 **Mẹo:** Chọn **2-core** là đủ để chạy Hermes Agent và Tailscale. Tiết kiệm core-hours cho việc khác!
+> ⏳ Đợi **30 giây đến 2 phút** để GitHub khởi tạo máy ảo. Lần đầu lâu nhất vì phải build Docker image; lần sau nhanh hơn nhờ cache.
 
 ##### 📀 Thông tin về ổ đĩa
 
@@ -62,7 +59,7 @@ Codespace free tier có **32 GB ổ cứng**, nhưng cần biết:
 
 ### Bước 4: Đợi Codespace khởi tạo
 
-Sau khi chọn cấu hình, Codespace sẽ bắt đầu khởi tạo. Quá trình này gồm:
+Sau khi click tạo, Codespace sẽ bắt đầu khởi tạo. Quá trình này gồm:
 
 1. **Provisioning VM** (~30 giây) — GitHub cấp phát máy ảo
 2. **Cloning repository** (~10 giây) — Code được clone vào container
