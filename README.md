@@ -312,6 +312,19 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ---
 
+### ⭐ Star History
+
+<p align="center">
+  <a href="https://star-history.com/#skappafrost/codespaces-hermes-server&Date">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=skappafrost/codespaces-hermes-server&type=Date&theme=dark" />
+      <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=skappafrost/codespaces-hermes-server&type=Date" width="600" />
+    </picture>
+  </a>
+</p>
+
+---
+
 <p align="center">
   <strong>⭐ Star this repo if you find it useful!</strong><br>
   📧 <a href="mailto:skappafrost@gmail.com">skappafrost@gmail.com</a>
