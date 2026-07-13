@@ -3,11 +3,12 @@
 
 > **Run Hermes Agent as a personal AI backend on free GitHub Codespaces — 24/7, zero cost, zero maintenance.**
 
-[![GitHub Free](https://img.shields.io/badge/GitHub-Free-white?logo=github&labelColor=181717)]()
-[![Codespaces](https://img.shields.io/badge/~60h%20uptime%20(120%20core--hours%2C%202--core)-white?logo=visualstudiocode&labelColor=007ACC)]()
-[![Hermes Agent](https://img.shields.io/badge/Hermes%20Agent-Server-white?logo=openai&labelColor=412991)]()
-[![Tailscale Free](https://img.shields.io/badge/Tailscale-Free-white?logo=tailscale&labelColor=24292F)]()
-[![License: MIT](https://img.shields.io/badge/License-MIT-white?labelColor=2ea043)]()
+[![GitHub Stars](https://img.shields.io/github/stars/skappafrost/codespaces-hermes-server?style=social)](https://github.com/skappafrost/codespaces-hermes-server)
+[![GitHub Free](https://img.shields.io/badge/GitHub-Free-white?logo=github&labelColor=181717)](https://github.com/pricing)
+[![Codespaces](https://img.shields.io/badge/~60h%20uptime%20(120%20core--hours%2C%202--core)-white?logo=visualstudiocode&labelColor=007ACC)](https://github.com/features/codespaces)
+[![Hermes Agent](https://img.shields.io/badge/Hermes%20Agent-Server-white?logo=openai&labelColor=412991)](https://hermes-agent.nousresearch.com)
+[![Tailscale Free](https://img.shields.io/badge/Tailscale-Free-white?logo=tailscale&labelColor=24292F)](https://tailscale.com/pricing)
+[![License: MIT](https://img.shields.io/badge/License-MIT-white?labelColor=2ea043)](LICENSE)
 
 ---
 
