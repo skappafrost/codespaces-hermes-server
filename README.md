@@ -1,7 +1,12 @@
+<br>
 
-# 🚀 Codespaces Hermes Server
+<h1 align="center">🚀 Codespaces Hermes Server</h1>
 
-> **Run Hermes Agent as a personal AI backend on free GitHub Codespaces — 24/7, zero cost, zero maintenance.**
+<p align="center">
+  <strong>Free AI Server in the Cloud — No VPS Required</strong><br>
+  Turn GitHub Codespaces into your own personal AI backend.<br>
+  No VPS. No Docker host. No monthly bill.
+</p>
 
 [![GitHub Stars](https://img.shields.io/github/stars/skappafrost/codespaces-hermes-server?style=social)](https://github.com/skappafrost/codespaces-hermes-server)
 [![GitHub Free](https://img.shields.io/badge/GitHub-Free-white?logo=github&labelColor=181717)](https://github.com/pricing)
@@ -20,24 +25,37 @@
 
 ---
 
-<!-- ========================================================================= -->
+<p align="center">
+  <img src="assets/hero-demo.png" width="860" alt="Hermes Agent running inside a GitHub Codespace — terminal showing ASCII art header, tool listing, and ready prompt">
+</p>
+
+---
+
+<!-- ===================================================================== -->
 <!-- 🇬🇧 ENGLISH -->
-<!-- ========================================================================= -->
+<!-- ===================================================================== -->
 
 ## 🇬🇧 English
 
 ### 📖 Overview
 
-This project provides a **complete step-by-step guide** for running **Hermes Agent** on **free GitHub Codespaces** as your personal AI backend — accessible from anywhere.
+If you've ever wanted a personal AI backend without paying for a VPS — this is it.
+
+| 📑 **Jump to** |
+|---|
+| [🗺️ Architecture](#️-architecture-overview) |
+| [📚 Step-by-Step Guide](#-detailed-guide-english) |
+| [📦 Repository Contents](#-repository-contents) |
+| [⚡ Quickstart](#-quickstart) |
+| [📊 Free vs Pro](#-github-free-vs-pro-comparison) |
 
 **What you'll learn:**
-- ✅ Create a free GitHub account and private repository
-- ✅ Configure `.devcontainer` for automatic Hermes Agent installation
-- ✅ Connect your Codespace to your local machine via **Tailscale VPN**
-- ✅ Run Hermes in server mode and connect remotely from Hermes Desktop
-- ✅ Manage core-hours and optimize costs
+- ✅ Create a free GitHub account + private repository
+- ✅ Auto-install Hermes Agent with a single `.devcontainer` config
+- ✅ Connect remotely from anywhere via Tailscale VPN — no public IP needed
+- ✅ Run 24/7 within free-tier limits (120 core-hours/month)
 
-> 💡 **New to this?** No problem! This guide is designed for absolute beginners.
+> 💡 **New to this?** No problem. Every step is documented with examples. Built for absolute beginners.
 
 ---
 
@@ -86,6 +104,26 @@ flowchart TB
 | 6 | [Install Hermes & Connect Remote](docs/en/06-install-hermes-connect-remote.md) | Full setup: Hermes server + Tailscale + remote | 15 min |
 | 7 | ⭐ [Codespace CLI Management](docs/en/07-codespace-cli-management.md) | Install gh CLI, create start/stop shortcuts, automate | 10 min |
 
+```mermaid
+flowchart LR
+    P1["1️⃣ Account"] --> P2["2️⃣ Repo"]
+    P2 --> P3["3️⃣ Config"]
+    P3 --> P4["4️⃣ Timeout"]
+    P4 --> P5["5️⃣ Codespace"]
+    P5 --> P6["6️⃣ Hermes + Tailscale"]
+    P6 --> P7["7️⃣ CLI"]
+    P7 --> Done["✅ COMPLETE"]
+    
+    style P1 fill:#1f6feb,color:#fff
+    style P2 fill:#1f6feb,color:#fff
+    style P3 fill:#1f6feb,color:#fff
+    style P4 fill:#d29922,color:#fff
+    style P5 fill:#d29922,color:#fff
+    style P6 fill:#2ea043,color:#fff
+    style P7 fill:#2ea043,color:#fff
+    style Done fill:#2ea043,color:#fff,stroke:#7ee787,stroke-width:3px
+```
+
 ---
 
 ### 📦 Repository Contents
@@ -118,7 +156,6 @@ codespaces-hermes-server/
 # 5. Inside Codespace — ONE-TIME Tailscale auth (only needed once):
 sudo tailscale up          # Opens browser to log in
 tailscale ip               # Save the 100.x.x.x IP
-# Note: After this one-time auth, postStart.sh auto-starts tailscaled + Hermes on every restart
 
 # 6. Create auth file
 cat >> ~/.hermes/.env <<EOF
@@ -149,11 +186,14 @@ chmod 600 ~/.hermes/.env
 
 ---
 
-<!-- ========================================================================= -->
+<!-- ===================================================================== -->
 <!-- 🇻🇳 TIẾNG VIỆT -->
-<!-- ========================================================================= -->
+<!-- ===================================================================== -->
 
 ## 🇻🇳 Tiếng Việt
+
+<details>
+<summary><strong>Mở hướng dẫn tiếng Việt</strong> — 7 phần, có ảnh minh họa</summary>
 
 ### 📖 Giới thiệu
 
@@ -267,7 +307,6 @@ codespaces-hermes-server/
 # 5. Trong Codespace — XÁC THỰC Tailscale 1 LẦN (chỉ cần làm 1 lần):
 sudo tailscale up          # Mở browser để đăng nhập
 tailscale ip               # Ghi lại IP 100.x.x.x
-# Lưu ý: Sau lần auth đầu, postStart.sh sẽ tự động start tailscaled + Hermes mỗi lần restart
 
 # 6. Tạo file auth
 cat >> ~/.hermes/.env <<EOF
@@ -295,6 +334,8 @@ chmod 600 ~/.hermes/.env
 > Với mục đích chạy Hermes Agent cá nhân, **GitHub Free là hoàn toàn đủ**.
 
 > ⚙️ **Về machine type:** Khi tạo Codespace, mặc định là **2 core — 8GB RAM**. Nếu muốn đổi, sau khi tạo Codespace xong, vào **https://github.com/codespaces** → click **`...`** (More actions) bên cạnh Codespace → **Change machine type**. Chỉ có 2 tuỳ chọn trên Free: 2-core (8GB) hoặc 4-core (8GB).
+
+</details>
 
 ---
 
