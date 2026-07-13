@@ -312,16 +312,15 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ---
 
-### ⭐ Star History
+## ⭐ Star History
 
-<p align="center">
-  <a href="https://star-history.com/#skappafrost/codespaces-hermes-server&Date">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=skappafrost/codespaces-hermes-server&type=Date&theme=dark" />
-      <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=skappafrost/codespaces-hermes-server&type=Date" width="600" />
-    </picture>
-  </a>
-</p>
+<a href="https://www.star-history.com/?type=date&repos=skappafrost%2Fcodespaces-hermes-server">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=skappafrost/codespaces-hermes-server&type=date&theme=dark&legend=top-left&sealed_token=4vk0WOX9v2EMqAch45yE7pP2HSqe2vaZqirQeRpbZUZwqIdxDNqgxeE1wH03fBGZ0QaySAG0tR_aBNEe0aGdnxcwxdbknME_-HOrflyzOhzYfkz7jPqAEQ" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=skappafrost/codespaces-hermes-server&type=date&legend=top-left&sealed_token=4vk0WOX9v2EMqAch45yE7pP2HSqe2vaZqirQeRpbZUZwqIdxDNqgxeE1wH03fBGZ0QaySAG0tR_aBNEe0aGdnxcwxdbknME_-HOrflyzOhzYfkz7jPqAEQ" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=skappafrost/codespaces-hermes-server&type=date&legend=top-left&sealed_token=4vk0WOX9v2EMqAch45yE7pP2HSqe2vaZqirQeRpbZUZwqIdxDNqgxeE1wH03fBGZ0QaySAG0tR_aBNEe0aGdnxcwxdbknME_-HOrflyzOhzYfkz7jPqAEQ" />
+ </picture>
+</a>
 
 ---
 
